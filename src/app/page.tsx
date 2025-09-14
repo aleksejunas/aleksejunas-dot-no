@@ -13,6 +13,27 @@ export default function Home() {
         This is a simple site to demonstrate MDX in Next.js
       </div>
 
+      {/* Small Typography example using Tailwind Typography (.prose) */}
+      <article className="prose dark:prose-invert max-w-none">
+        <h2>Typography Example</h2>
+        <p>
+          The <code>prose</code> class applies beautiful default styles to rich
+          text. It handles headings, paragraphs, lists, links, and more.
+        </p>
+        <ul>
+          <li>Semantic HTML elements</li>
+          <li>
+            Inline code like <code>const x = 42;</code>
+          </li>
+          <li>
+            Links look nice by default — <a href="/mdx-page">see the MDX page</a>
+          </li>
+        </ul>
+        <blockquote>
+          This blockquote demonstrates the plugin’s default quote styling.
+        </blockquote>
+      </article>
+
       <div className="flex gap-4 items-center flex-col sm:flex-row">
         <Link
           className="rounded-full border border-solid
