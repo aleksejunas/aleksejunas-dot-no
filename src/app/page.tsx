@@ -1,190 +1,174 @@
-import Image from "next/image";
-import Link from "next/link";
+// import Image from "next/image";
+// import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start"></main>
-      <div className="text-center">
-        <h1 className="text-4xl font-bold tracking-tight text-gray-900 dark:text-gray-50 sm:text-6xl">
-          Welcome to my Next.js site
-        </h1>
-        <p className="mt-6 text-lg leading-8 text-gray-600 dark:text-gray-300"></p>
-        This is a simple site to demonstrate MDX in Next.js
-      </div>
+    <main className="grid min-h-screen grid-cols-[1fr_3fr] bg-[#f5f2ed] text-[#111]">
+      {/* Left column */}
+      <section className="flex flex-col justify-between p-6 text-sm">
+        <div className="rotate-180 [writing-mode:vertical-rl] space-y-4">
+          <a href="https://dribbble.com">DR</a>
+          <a href="https://twitter.com">TW</a>
+          <a href="https://linkedin.com">LI</a>
+        </div>
 
-      {/* Small Typography example using Tailwind Typography (.prose) */}
-      <article className="prose dark:prose-invert max-w-none">
-        <h2>Typography Example</h2>
-        <p>
-          The <code>prose</code> class applies beautiful default styles to rich
-          text. It handles headings, paragraphs, lists, links, and more.
-        </p>
-        <ul>
-          <li>Semantic HTML elements</li>
-          <li>
-            Inline code like <code>const x = 42;</code>
-          </li>
-          <li>
-            Links look nice by default —{" "}
-            <a href="/mdx-page">see the MDX page</a>
-          </li>
-        </ul>
-        <blockquote>
-          This blockquote demonstrates the plugin’s default quote styling.
-        </blockquote>
-      </article>
+        <div>
+          <p className="font-medium text-8xl">
+            Rolf Aleksejunas Øvrum Christensen
+          </p>
+          <p>Developer / Photographer</p>
+          <p>
+            Currently working at{" "}
+            <a href="#" className="underline hover:opacity-70 transition">
+              Detail Technologies
+            </a>
+          </p>
+        </div>
 
-      <div className="flex gap-4 items-center flex-col sm:flex-row">
-        <Link
-          className="rounded-full border border-solid
-      border-transparent transition-colors flex items-center
-      justify-center bg-foreground text-background gap-2
-      hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm
-      sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-          href="/mdx-page"
-        >
-          View MDX Page
-        </Link>
-      </div>
-    </div>
+        <div className="rotate-180 [writing-mode:vertical-rl]">© 2024</div>
+      </section>
+
+      {/* Right column */}
+      <nav className="flex flex-col justify-center gap-6 p-6">
+        {["WORK", "ABOUT", "SHOP", "CONTACT"].map((item) => (
+          <a
+            key={item}
+            href={`/${item.toLowerCase()}`}
+            className="font-serif text-[clamp(2rem,8vw,8rem)] leading-none uppercase hover:opacity-70 transition"
+          >
+            {item}
+          </a>
+        ))}
+      </nav>
+    </main>
   );
 }
 
 {
-  /* <Image */
+  /* <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20"> */
 }
 {
-  /*   className="dark:invert" */
+  /*   <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start"></main> */
 }
 {
-  /*   src="/next.svg" */
+  /*   <div className="text-center"> */
 }
 {
-  /*   alt="Next.js logo" */
+  /*     <h1 className="text-4xl font-bold tracking-tight text-gray-900 dark:text-gray-50 sm:text-6xl"> */
 }
 {
-  /*   width={180} */
+  /*       Welcome to my Next.js site */
 }
 {
-  /*   height={38} */
+  /*     </h1> */
 }
 {
-  /*   priority */
+  /*     <p className="mt-6 text-lg leading-8 text-gray-600 dark:text-gray-300"></p> */
 }
 {
-  /* /> */
+  /*     This is a simple site to demonstrate MDX in Next.js */
 }
 {
-  /* <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left"> */
+  /*   </div> */
 }
 {
-  /*   <li className="mb-2 tracking-[-.01em]"> */
+  /**/
+}
+// {/*   {/* Small Typography example using Tailwind Typography (.prose) */} */}
+// {/*   <article className="prose dark:prose-invert max-w-none"> */}
+// {/*     <h2>Typography Example</h2> */}
+{
+  /*     <p> */
 }
 {
-  /*     Get started by editing{" "} */
+  /*       The <code>prose</code> class applies beautiful default styles to rich */
 }
 {
-  /*     <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded"> */
+  /*       text. It handles headings, paragraphs, lists, links, and more. */
 }
 {
-  /*       src/app/page.tsx */
+  /*     </p> */
 }
 {
-  /*     </code> */
+  /*     <ul> */
 }
 {
-  /*     . */
+  /*       <li>Semantic HTML elements</li> */
 }
 {
-  /*   </li> */
+  /*       <li> */
 }
 {
-  /*   <li className="tracking-[-.01em]"> */
+  /*         Inline code like <code>const x = 42;</code> */
 }
 {
-  /*     Save and see your changes instantly. */
+  /*       </li> */
 }
 {
-  /*   </li> */
+  /*       <li> */
 }
 {
-  /* </ol> */
+  /*         Links look nice by default —{" "} */
+}
+{
+  /*         <a href="/mdx-page">see the MDX page</a> */
+}
+{
+  /*       </li> */
+}
+{
+  /*     </ul> */
+}
+{
+  /*     <blockquote> */
+}
+{
+  /*       This blockquote demonstrates the plugin’s default quote styling. */
+}
+{
+  /*     </blockquote> */
+}
+{
+  /*   </article> */
 }
 {
   /**/
 }
 {
-  /* <div className="flex gap-4 items-center flex-col sm:flex-row"> */
+  /*   <div className="flex gap-4 items-center flex-col sm:flex-row"> */
 }
 {
-  /*   <a */
+  /*     <Link */
 }
 {
-  /*     className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto" */
+  /*       className="rounded-full border border-solid */
 }
 {
-  /*     href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app" */
+  /*   border-transparent transition-colors flex items-center */
 }
 {
-  /*     target="_blank" */
+  /*   justify-center bg-foreground text-background gap-2 */
 }
 {
-  /*     rel="noopener noreferrer" */
+  /*   hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm */
 }
 {
-  /*   > */
+  /*   sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto" */
 }
 {
-  /*     <Image */
+  /*       href="/mdx-page" */
 }
 {
-  /*       className="dark:invert" */
+  /*     > */
 }
 {
-  /*       src="/vercel.svg" */
+  /*       View MDX Page */
 }
 {
-  /*       alt="Vercel logomark" */
+  /*     </Link> */
 }
 {
-  /*       width={20} */
-}
-{
-  /*       height={20} */
-}
-{
-  /*     /> */
-}
-{
-  /*     Deploy now */
-}
-{
-  /*   </a> */
-}
-{
-  /*   <a */
-}
-{
-  /*     className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]" */
-}
-{
-  /*     href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app" */
-}
-{
-  /*     target="_blank" */
-}
-{
-  /*     rel="noopener noreferrer" */
-}
-{
-  /*   > */
-}
-{
-  /*     Read our docs */
-}
-{
-  /*   </a> */
+  /*   </div> */
 }
 {
   /* </div> */
