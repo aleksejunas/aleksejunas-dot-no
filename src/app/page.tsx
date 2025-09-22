@@ -7,6 +7,7 @@ const links = {
   WORKS: "/works-page",
   ABOUT: "/about-page",
   CONTACT: "/contact-page",
+  MDX: "/mdx-page",
 };
 
 const HomePage = () => {
@@ -50,18 +51,11 @@ const HomePage = () => {
             <Link
               key={text}
               href={href}
-              className="font-serif text-[clamp(2rem,38vw,10rem)] leading-none uppercase hover:opacity-70 transition"
+              className="font-serif text-[clamp(2rem,38vw,10rem)] leading-none uppercase hover:text-rose-400 transition"
             >
               {" "}
               {text}
             </Link>
-            {/* <a */}
-            {/*   key={text} */}
-            {/*   href={href} */}
-            {/*   className="font-serif text-[clamp(2rem,38vw,10rem)] leading-none uppercase hover:opacity-70 transition" */}
-            {/* > */}
-            {/*   {text} */}
-            {/* </a> */}
           </EnterAnimation>
         ))}
       </nav>
