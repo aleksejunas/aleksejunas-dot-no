@@ -1,7 +1,15 @@
-import Image from "next/image";
+// import Image from "next/image";
 import Link from "next/link";
+import EnterAnimation from "@/components/motion/EnterAnimation";
 
-export default function HomePage() {
+const links = {
+  BLOG: "/blog-page",
+  WORKS: "/works-page",
+  ABOUT: "/about-page",
+  CONTACT: "/contact-page",
+};
+
+const HomePage = () => {
   const currentYear = new Date().getFullYear();
   return (
     <main className="grid min-h-screen grid-cols-[1fr_3fr] bg-[#ECE7E1] text-[#111] dark:bg-[#111] dark:text-[#ECE7E1]">
@@ -15,7 +23,6 @@ export default function HomePage() {
             LI
           </a>
         </div>
-
         <div>
           <p className="font-medium text-xl">
             Rolf Aleksejunas Øvrum Christensen
@@ -31,25 +38,35 @@ export default function HomePage() {
             </a>
           </div>
         </div>
-
         <div className="rotate-180 [writing-mode:vertical-rl]">
           © {currentYear}
         </div>
       </section>
-
       {/* Right column */}
       <nav className="flex flex-col justify-center gap-6 p-6">
-        {["WORK", "ABOUT", "SHOP", "CONTACT"].map((item) => (
-          <a
-            key={item}
-            href={`/${item.toLowerCase()}`}
-            className="font-serif text-[clamp(2rem,38vw,10rem)] leading-none uppercase hover:opacity-70 transition"
-            // className="text-8xl"
-          >
-            {item}
-          </a>
+        {Object.entries(links).map(([text, href]) => (
+          <EnterAnimation key={text}>
+            {" "}
+            <Link
+              key={text}
+              href={href}
+              className="font-serif text-[clamp(2rem,38vw,10rem)] leading-none uppercase hover:opacity-70 transition"
+            >
+              {" "}
+              {text}
+            </Link>
+            {/* <a */}
+            {/*   key={text} */}
+            {/*   href={href} */}
+            {/*   className="font-serif text-[clamp(2rem,38vw,10rem)] leading-none uppercase hover:opacity-70 transition" */}
+            {/* > */}
+            {/*   {text} */}
+            {/* </a> */}
+          </EnterAnimation>
         ))}
       </nav>
     </main>
   );
-}
+};
+
+export default HomePage;
