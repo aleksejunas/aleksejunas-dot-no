@@ -46,7 +46,16 @@ const HomePage = () => {
       {/* Right column */}
       <nav className="flex flex-col justify-center gap-6 p-6">
         {Object.entries(links).map(([text, href]) => (
-          <EnterAnimation key={text}>
+          <EnterAnimation
+            key={text}
+            whileHover={{
+              scale: 1.1,
+              marginRight: "35px",
+              skewX: "-20deg",
+              // color: "#e11d48",
+            }}
+            whileTap={{ scale: 0.9 }}
+          >
             {" "}
             {/* TODO: Animate the links on hover and on click/tap */}
             <Link

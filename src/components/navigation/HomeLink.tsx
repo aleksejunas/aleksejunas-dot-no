@@ -11,7 +11,7 @@ const HomeLink = () => {
   return (
     <Link href="/">
       <div className="absolute top-6 right-6  cursor-pointer">
-        <Home className="h-10 2-10" />
+        <Home className="h-10 2-10 fill-black dark:fill-white" />
       </div>
     </Link>
   );
