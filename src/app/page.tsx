@@ -13,7 +13,7 @@ const links = {
 const HomePage = () => {
   const currentYear = new Date().getFullYear();
   return (
-    <main className="grid min-h-screen grid-cols-[1fr_3fr] bg-[#ECE7E1] text-[#111] dark:bg-[#111] dark:text-[#ECE7E1]">
+    <main className="grid min-h-screen grid-cols-[1fr_1fr] bg-[#ECE7E1] text-[#111] dark:bg-[#111] dark:text-[#ECE7E1]">
       {/* Left column */}
       <section className="flex flex-col justify-between p-6 text-sm">
         <div className="rotate-180 [writing-mode:vertical-rl] space-y-4">
@@ -48,6 +48,7 @@ const HomePage = () => {
         {Object.entries(links).map(([text, href]) => (
           <EnterAnimation key={text}>
             {" "}
+            {/* TODO: Animate the links on hover and on click/tap */}
             <Link
               key={text}
               href={href}

@@ -4,7 +4,7 @@ import React from "react";
 
 const BlogPage = () => {
   return (
-    <h1 className="text-4xl font-bold tracking-tight text-gray-900 dark:text-gray-50 sm:text-gray-50 sm:text-6xl">
+    <h1 className="text-4xl font-bold tracking-tight">
       Welcome to the Blog Page
     </h1>
   );
