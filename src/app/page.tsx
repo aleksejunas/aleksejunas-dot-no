@@ -20,22 +20,25 @@ const HomePage = () => {
           <a href="https://github.com/aleksejunas" target="_blank">
             GH
           </a>
-          <a href="https://linkedin.com/rolfdeveloper" target="_blank">
+          <a href="https://linkedin.com/in/rolfdeveloper/" target="_blank">
             LI
           </a>
         </div>
         <div>
-          <p className="font-medium text-xl">
+          <p className="font-sans font-semibold text-xl">
             Rolf Aleksejunas Øvrum Christensen
           </p>
-          <p>Developer / Photographer</p>
-          Currently working on{" "}
+          <p className="font-semibold font-sans">Developer / Photographer</p>
+          <br />
+          <p className="font-sans ">+4791579958</p>
+          <br />
+          Currently working on
           <div>
             <a
               href="https://github.com/aleksejunas/aleksejunas-dot-no"
               className="underline hover:opacity-70 transition"
             >
-              <p> This very site</p>
+              <p className="font-sans font-light"> This very site</p>
             </a>
           </div>
         </div>
@@ -51,19 +54,16 @@ const HomePage = () => {
             whileHover={{
               scale: 1.1,
               marginRight: "35px",
-              skewX: "-20deg",
-              // color: "#e11d48",
+              skewY: "5deg",
             }}
             whileTap={{ scale: 0.9 }}
           >
-            {" "}
-            {/* TODO: Animate the links on hover and on click/tap */}
             <Link
               key={text}
               href={href}
-              className="font-serif text-[clamp(2rem,38vw,10rem)] leading-none uppercase hover:text-rose-400 transition"
+              // className="font-arapey text-[clamp(2rem,38vw,10rem)] leading-none uppercase hover:text-rose-400 hover:font-arapey-italic transition"
+              className="font-sans font-bold  text-4xl  sm:text-5xl lg:text-9xl leading-none uppercase transition hover:text-rose-400"
             >
-              {" "}
               {text}
             </Link>
           </EnterAnimation>
