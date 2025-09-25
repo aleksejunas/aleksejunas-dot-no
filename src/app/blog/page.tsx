@@ -1,0 +1,1 @@
+// Page to list all published blog posts.

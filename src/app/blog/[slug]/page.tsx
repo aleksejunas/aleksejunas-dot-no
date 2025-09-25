@@ -1,0 +1,1 @@
+// Dynamic page to display a single post.

@@ -1,0 +1,1 @@
+// Handles authentication callbacks from Supabase.
