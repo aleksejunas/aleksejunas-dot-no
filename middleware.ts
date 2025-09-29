@@ -1,4 +1,22 @@
 // Middleware to protect routes like /admin.
+
+/*
+What this code does:
+
+   1. Creates a Server-Side Supabase Client: The createServerClient is
+      special. It runs on the server before a page is rendered and has
+      access to the request cookies, allowing it to know who the user is.
+   2. Refreshes the Session: Simply calling supabase.auth.getSession()
+      will automatically keep the user's session active.
+   3. Protects Routes: The if (!session && ...) block is our security
+      guard. It checks if a user is trying to access any page under
+      /admin. If they don't have a session (i.e., they aren't logged in),
+      it redirects them to our new /login page.
+   4. Matcher: The config object at the bottom tells Next.js to run this
+      middleware on every request except for static files and images,
+      which makes it very efficient.
+ * */
+
 import { createServerClient, type CookieOptions } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
