@@ -1,1 +1,3 @@
-// Page with a form to create a new post.
+export default function Page() {
+  return <h1>New Post</h1>;
+}

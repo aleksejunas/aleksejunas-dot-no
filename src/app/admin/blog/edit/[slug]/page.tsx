@@ -1,1 +1,3 @@
-// Page to edit an existing post.
+export default function Page() {
+  return <h1>Edit Post</h1>;
+}

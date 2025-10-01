@@ -1,1 +1,3 @@
-// Page to list all published blog posts.
+export default function Page() {
+  return <h1>Blog</h1>;
+}

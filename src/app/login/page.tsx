@@ -2,7 +2,7 @@
 
 "use client";
 
-import { createClient } from "@/lib/supabase";
+import createClient from "@/lib/supabase";
 import { type SupabaseClient } from "@supabase/supabase-js";
 
 const LoginPage = () => {

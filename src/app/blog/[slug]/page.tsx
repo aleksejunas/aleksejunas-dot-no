@@ -1,1 +1,3 @@
-// Dynamic page to display a single post.
+export default function Page() {
+  return <h1>Blog Post</h1>;
+}
