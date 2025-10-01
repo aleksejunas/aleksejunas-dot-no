@@ -3,17 +3,17 @@ import Link from "next/link";
 import EnterAnimation from "@/components/motion/EnterAnimation";
 
 const links = {
-  BLOG: "/blog-page",
-  WORKS: "/works-page",
-  ABOUT: "/about-page",
-  CONTACT: "/contact-page",
-  MDX: "/mdx-page",
+  BLOG: "/blog",
+  WORKS: "/works",
+  ABOUT: "/about",
+  CONTACT: "/contact",
+  MDX: "/mdx",
 };
 
 const HomePage = () => {
   const currentYear = new Date().getFullYear();
   return (
-    <main className="grid min-h-screen grid-cols-[1fr_1fr] bg-[#ECE7E1] text-[#111] dark:bg-[#111] dark:text-[#ECE7E1]">
+    <main className="grid min-h-screen grid-cols-[1fr_1fr] bg-[#ECE7E1] text-[#111] dark:bg-[#111] dark:text-[#ECE7E1] overflow-hidden">
       {/* Left column */}
       <section className="flex flex-col justify-between p-6 text-sm">
         <div className="rotate-180 [writing-mode:vertical-rl] space-y-4">
