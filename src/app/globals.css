@@ -2,8 +2,16 @@
 @plugin "@tailwindcss/typography";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* --- LIGHT MODE --- */
+  --background: #fff6c2; /* yellow-200 */
+  /* --background: #fcd34d For more Poster look (yellow-300) */
+  --foreground: #1a1a1a;
+
+  --accent: #ff8fab; /* rose-400 */
+  --accent-hover: #ff6b9a; /* rose-300 */
+  --muted: #6b7280; /* slate-500ish */
+
+  color-scheme: light;
 }
 
 @theme inline {
@@ -11,18 +19,63 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-  --font-family-arapey: var(--font-arapey), serif;
+  --font-arapey: var(--font-arapey), serif;
 }
 
+/* --- DARK MODE --- */
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
+    --background: #232627;
     --foreground: #ededed;
+    --accent: #fb7185; /* also works in dark-mode */
+    --accent-hover: #fda4af;
+    color-scheme: dark;
   }
 }
 
+/* Base */
 body {
   background: var(--background);
   color: var(--foreground);
-  /* font-family: var(--font-arapey), serif; */
+}
+
+/* Links og interaksjoner */
+/*  TODO: Give classnames to links, to not style all the links the same */
+a {
+  color: var(--foreground);
+  text-decoration: none;
+  font-weight: 800;
+  text-transform: uppercase;
+  transition:
+    color 0.18s ease,
+    text-underline-offset 0.18s ease;
+  text-underline-offset: 0.15em;
+}
+
+a:hover {
+  color: var(--accent-hover);
+}
+a:active,
+a[aria-current="page"] {
+  color: var(--accent);
+}
+
+/* Fokusring som ikke er stygg */
+:where(a, button, [tabindex]:not([tabindex="-1"])):focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Sekundærtekst og små detaljer */
+.small,
+.muted,
+time,
+figcaption {
+  color: var(--muted);
+}
+
+/* Tekstmarkering (ser pro ut) */
+::selection {
+  background: color-mix(in oklab, var(--accent) 35%, transparent);
+  color: var(--foreground);
 }

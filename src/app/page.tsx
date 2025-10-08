@@ -12,22 +12,32 @@ const links = {
 
 const HomePage = () => {
   const currentYear = new Date().getFullYear();
+  const myName = ["Rolf", "Aleksejunas", "Christensen"];
+
   return (
-    <main className="grid min-h-screen grid-cols-[1fr_1fr] bg-[#ECE7E1] text-[#111] dark:bg-[#111] dark:text-[#ECE7E1] overflow-hidden">
+    // bg-[#ECE7E1]
+    <main className="grid min-h-screen grid-cols-[1fr_1fr] bg-background text-[#111] dark:bg-background dark:text-[#ECE7E1] overflow-hidden">
       {/* Left column */}
       <section className="flex flex-col justify-between p-6 text-sm">
         <div className="rotate-180 [writing-mode:vertical-rl] space-y-4">
+          {/* TODO: Animate so it goes horizontal */}
           <a href="https://github.com/aleksejunas" target="_blank">
             GH
           </a>
+          {/* TODO: Animate so it goes horizontal */}
           <a href="https://linkedin.com/in/rolfdeveloper/" target="_blank">
             LI
           </a>
         </div>
         <div>
-          <p className="font-sans font-semibold text-xl">
-            Rolf Aleksejunas Øvrum Christensen
-          </p>
+          {myName.map((part, idx) => (
+            <p key={idx} className="font-sans font-thin text-xl">
+              {part}
+            </p>
+          ))}
+          {/* <p className="font-sans font-semibold text-xl"> */}
+          {/*   Rolf Aleksejunas Øvrum Christensen */}
+          {/* </p> */}
           <p className="font-semibold font-sans">Developer / Photographer</p>
           <br />
           <p className="font-sans ">+4791579958</p>
@@ -61,7 +71,6 @@ const HomePage = () => {
             <Link
               key={text}
               href={href}
-              // className="font-arapey text-[clamp(2rem,38vw,10rem)] leading-none uppercase hover:text-rose-400 hover:font-arapey-italic transition"
               className="font-sans font-bold  text-4xl  sm:text-5xl lg:text-9xl leading-none uppercase transition hover:text-rose-400"
             >
               {text}
