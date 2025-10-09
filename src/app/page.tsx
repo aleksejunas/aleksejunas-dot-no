@@ -1,4 +1,3 @@
-// import Image from "next/image";
 import Link from "next/link";
 import EnterAnimation from "@/components/motion/EnterAnimation";
 
@@ -15,17 +14,23 @@ const HomePage = () => {
   const myName = ["Rolf", "Aleksejunas", "Christensen"];
 
   return (
-    // bg-[#ECE7E1]
     <main className="grid min-h-screen grid-cols-[1fr_1fr] bg-background text-[#111] dark:bg-background dark:text-[#ECE7E1] overflow-hidden">
       {/* Left column */}
       <section className="flex flex-col justify-between p-6 text-sm">
         <div className="rotate-180 [writing-mode:vertical-rl] space-y-4">
-          {/* TODO: Animate so it goes horizontal */}
-          <a href="https://github.com/aleksejunas" target="_blank">
+          {/* TODO: Add animation that spins the link text from vertical to horizontal position on hover */}
+          <a
+            href="https://github.com/aleksejunas"
+            target="_blank"
+            className="text-foreground font-bold uppercase hover:text-rose-400 focus:outline-none transition-transform transform hover:rotate-0 hover:-translate-y-4"
+          >
             GH
           </a>
-          {/* TODO: Animate so it goes horizontal */}
-          <a href="https://linkedin.com/in/rolfdeveloper/" target="_blank">
+          <a
+            href="https://linkedin.com/in/rolfdeveloper/"
+            target="_blank"
+            className="text-foreground font-bold uppercase hover:text-rose-400 focus:outline-none transition-transform transform hover:rotate-0 hover:-translate-y-4"
+          >
             LI
           </a>
         </div>
@@ -35,9 +40,6 @@ const HomePage = () => {
               {part}
             </p>
           ))}
-          {/* <p className="font-sans font-semibold text-xl"> */}
-          {/*   Rolf Aleksejunas Øvrum Christensen */}
-          {/* </p> */}
           <p className="font-semibold font-sans">Developer / Photographer</p>
           <br />
           <p className="font-sans ">+4791579958</p>
@@ -46,7 +48,7 @@ const HomePage = () => {
           <div>
             <a
               href="https://github.com/aleksejunas/aleksejunas-dot-no"
-              className="underline hover:opacity-70 transition"
+              className="underline hover:opacity-70 hover:text-rose-400 transition focus:outline-none"
             >
               <p className="font-sans font-light"> This very site</p>
             </a>
@@ -71,7 +73,7 @@ const HomePage = () => {
             <Link
               key={text}
               href={href}
-              className="font-sans font-bold  text-4xl  sm:text-5xl lg:text-9xl leading-none uppercase transition hover:text-rose-400"
+              className="font-sans font-bold text-4xl sm:text-5xl lg:text-9xl leading-none uppercase transition hover:text-rose-400 focus:outline-none"
             >
               {text}
             </Link>
