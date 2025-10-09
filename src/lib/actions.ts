@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
+import { redirect } from "next/navigation";
 
 // TODO: Implementer funksjonen for å lage et nytt blogginnlegg.
 // 1. Hent ut data (title, content, slug) fra `formData`.
@@ -32,6 +33,9 @@ export async function createPost(formData: FormData) {
 
   revalidatePath("/blog");
   revalidatePath("/admin/blog");
+
+  // Redirect to the new post
+  redirect(`/blog/${slug}`);
 
   console.log("Creating post with data:", { title, content, slug });
   console.log("Creating post with data:", formData);
@@ -69,6 +73,9 @@ export async function updatePost(postId: string, formData: FormData) {
   revalidatePath(`/blog/${slug}`);
   revalidatePath("/admin/blog");
 
+  // Redirect to the updated post
+  redirect(`/blog/${slug}`);
+
   console.log(`Updating post ${postId} with data:`, { title, content, slug });
   console.log(`Updating post ${postId} with data:`, formData);
 }
@@ -91,6 +98,9 @@ export async function deletePost(postId: string) {
 
   revalidatePath("/blog");
   revalidatePath("/admin/blog");
+
+  // Redirect to admin blog overview
+  redirect("/admin/blog");
 
   console.log(`Deleting post ${postId}`);
 }
