@@ -28,6 +28,7 @@ const LoginPage = () => {
     >
       <button
         onClick={handleSignInWithGoogle}
+        className="bg-yellow-500 hover:bg-white hover:text-yellow-500 hover:font-bold text-white font-bold py-2 px-4 rounded"
         style={{
           padding: "10px 20px",
         }}

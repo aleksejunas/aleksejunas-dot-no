@@ -13,7 +13,8 @@ async function getPost(slug: string) {
   if (slug === "ikke-funnet") return null;
   return {
     title: "Mitt første innlegg",
-    content: "# Hei Verden!\n\nDette er innholdet i mitt første innlegg. Det støtter **markdown**!"
+    content:
+      "# Hei Verden!\n\nDette er innholdet i mitt første innlegg. Det støtter **markdown**!",
   };
 }
 
@@ -22,7 +23,11 @@ async function getPost(slug: string) {
 // 2. I komponenten, bruk `<MDXRemote source={post.content} />` for å rendere innholdet.
 // 3. Du kan sende inn egendefinerte komponenter via `components`-propen til MDXRemote, som vil bruke din `mdx-components.tsx`-fil.
 
-export default async function BlogPostPage({ params }: { params: { slug: string } }) {
+export default async function BlogPostPage({
+  params,
+}: {
+  params: { slug: string };
+}) {
   const post = await getPost(params.slug);
 
   if (!post) {
@@ -37,3 +42,4 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
     </article>
   );
 }
+

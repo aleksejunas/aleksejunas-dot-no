@@ -10,7 +10,29 @@ import { createClient } from "@/lib/supabase/server";
 // 4. Håndter eventuelle feil.
 // 5. Kall `revalidatePath('/blog')` og `revalidatePath('/admin/blog')` for å oppdatere cachen.
 // 6. Omdiriger brukeren til det nye innlegget eller admin-siden.
+
 export async function createPost(formData: FormData) {
+  const title = formData.get("title") as string;
+  const content = formData.get("content") as string;
+  const slug = formData.get("slug") as string;
+
+  const supabase = createClient();
+
+  const { data, error } = await supabase
+    .from("posts")
+    .insert([{ title, content, slug }])
+    .select()
+    .single();
+
+  if (error) {
+    console.error("Error creating post: ", error);
+    throw new Error("Could not create blog post");
+  }
+
+  revalidatePath("/blog");
+  revalidatePath("/admin/blog");
+
+  console.log("Creating post with data:", { title, content, slug });
   console.log("Creating post with data:", formData);
 }
 
@@ -21,7 +43,31 @@ export async function createPost(formData: FormData) {
 // 4. Håndter eventuelle feil.
 // 5. Kall `revalidatePath('/blog')`, `revalidatePath('/blog/[slug]')`, og `revalidatePath('/admin/blog')`.
 // 6. Omdiriger brukeren.
+
 export async function updatePost(postId: string, formData: FormData) {
+  const title = formData.get("title") as string;
+  const content = formData.get("content") as string;
+  const slug = formData.get("slug") as string;
+
+  const supabase = createClient();
+
+  const { data, error } = await supabase
+    .from("posts")
+    .update({ title, content, slug })
+    .eq("id", postId)
+    .select()
+    .single();
+
+  if (error) {
+    console.error("Error updating post:", error);
+    throw new Error("Could not update blog post");
+  }
+
+  revalidatePath("/blog");
+  revalidatePath(`/blog/${slug}`);
+  revalidatePath("/admin/blog");
+
+  console.log(`Updating post ${postId} with data:`, { title, content, slug });
   console.log(`Updating post ${postId} with data:`, formData);
 }
 
@@ -30,6 +76,7 @@ export async function updatePost(postId: string, formData: FormData) {
 // 2. Kall `supabase.from('posts').delete().eq('id', postId)`.
 // 3. Håndter eventuelle feil.
 // 4. Kall `revalidatePath('/blog')` og `revalidatePath('/admin/blog')`.
+
 export async function deletePost(postId: string) {
   console.log(`Deleting post ${postId}`);
 }
