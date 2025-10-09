@@ -19,8 +19,7 @@ export async function createPost(formData: FormData) {
 
   const supabase = await createClient();
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { data: _data, error } = await supabase
+  const { data, error } = await supabase
     .from("posts")
     .insert([{ title, content, slug }])
     .select()
@@ -34,11 +33,10 @@ export async function createPost(formData: FormData) {
   revalidatePath("/blog");
   revalidatePath("/admin/blog");
 
+  // Use slug from data if available, fallback to FormData
+  const redirectSlug = data?.slug ?? slug;
   // Redirect to the new post
-  redirect(`/blog/${slug}`);
-
-  console.log("Creating post with data:", { title, content, slug });
-  console.log("Creating post with data:", formData);
+  redirect(`/blog/${redirectSlug}`);
 }
 
 // TODO: Implementer funksjonen for å oppdatere et eksisterende blogginnlegg.
@@ -56,8 +54,7 @@ export async function updatePost(postId: string, formData: FormData) {
 
   const supabase = await createClient();
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { data: _data, error } = await supabase
+  const { data, error } = await supabase
     .from("posts")
     .update({ title, content, slug })
     .eq("id", postId)
@@ -73,11 +70,10 @@ export async function updatePost(postId: string, formData: FormData) {
   revalidatePath(`/blog/${slug}`);
   revalidatePath("/admin/blog");
 
+  // Use slug from data if available, fallback to FormData
+  const redirectSlug = data?.slug ?? slug;
   // Redirect to the updated post
-  redirect(`/blog/${slug}`);
-
-  console.log(`Updating post ${postId} with data:`, { title, content, slug });
-  console.log(`Updating post ${postId} with data:`, formData);
+  redirect(`/blog/${redirectSlug}`);
 }
 
 // TODO: Implementer funksjonen for å slette et blogginnlegg.
@@ -101,6 +97,4 @@ export async function deletePost(postId: string) {
 
   // Redirect to admin blog overview
   redirect("/admin/blog");
-
-  console.log(`Deleting post ${postId}`);
 }
