@@ -16,7 +16,7 @@ export async function createPost(formData: FormData) {
   const content = formData.get("content") as string;
   const slug = formData.get("slug") as string;
 
-  const supabase = createClient();
+  const supabase = await createClient();
 
   const { data, error } = await supabase
     .from("posts")
@@ -49,7 +49,7 @@ export async function updatePost(postId: string, formData: FormData) {
   const content = formData.get("content") as string;
   const slug = formData.get("slug") as string;
 
-  const supabase = createClient();
+  const supabase = await createClient();
 
   const { data, error } = await supabase
     .from("posts")
@@ -78,5 +78,17 @@ export async function updatePost(postId: string, formData: FormData) {
 // 4. Kall `revalidatePath('/blog')` og `revalidatePath('/admin/blog')`.
 
 export async function deletePost(postId: string) {
+  const supabase = await createClient();
+
+  const { error } = await supabase.from("posts").delete().eq("id", postId);
+
+  if (error) {
+    console.error("Error deleting post:", error);
+    throw new Error("Could not delete blog post");
+  }
+
+  revalidatePath("/blog");
+  revalidatePath("/admin/blog");
+
   console.log(`Deleting post ${postId}`);
 }
