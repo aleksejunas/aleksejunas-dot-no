@@ -18,7 +18,8 @@ export async function createPost(formData: FormData) {
 
   const supabase = await createClient();
 
-  const { data, error } = await supabase
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { data: _data, error } = await supabase
     .from("posts")
     .insert([{ title, content, slug }])
     .select()
@@ -51,7 +52,8 @@ export async function updatePost(postId: string, formData: FormData) {
 
   const supabase = await createClient();
 
-  const { data, error } = await supabase
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { data: _data, error } = await supabase
     .from("posts")
     .update({ title, content, slug })
     .eq("id", postId)
