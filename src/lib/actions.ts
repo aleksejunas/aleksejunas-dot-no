@@ -19,9 +19,19 @@ export async function createPost(formData: FormData) {
 
   const supabase = await createClient();
 
+  // Get user info from session
+  const {
+    data: { user },
+    error: userError,
+  } = await supabase.auth.getUser();
+
+  if (userError || !user) {
+    throw new Error("Bruker er ikke innlogget");
+  }
+
   const { data, error } = await supabase
     .from("posts")
-    .insert([{ title, content, slug }])
+    .insert([{ title, content, slug, user_id: user.id }])
     .select()
     .single();
 
