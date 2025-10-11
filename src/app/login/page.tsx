@@ -7,7 +7,7 @@ import { type SupabaseClient } from "@supabase/supabase-js";
 
 const LoginPage = () => {
   const supabase: SupabaseClient = createClient();
-
+  // TODO: Implement the whole Google Signin flow since Supabase demands auth to post blog posts
   const handleSignInWithGoogle = async () => {
     await supabase.auth.signInWithOAuth({
       provider: "google",
