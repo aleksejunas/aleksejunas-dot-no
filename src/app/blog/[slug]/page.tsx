@@ -1,4 +1,7 @@
 import { notFound } from "next/navigation";
+import { createClient } from "@/lib/supabase/server";
+import { MDXRemote } from "next-mdx-remote/rsc";
+import mdxComponents from "@/components/mdx-components"; //  Lag denne filen hvis jeg vil ha custom komponenter
 
 // TODO: Installer og sett opp `next-mdx-remote`.
 // Kjør `pnpm add next-mdx-remote`.
@@ -9,13 +12,15 @@ import { notFound } from "next/navigation";
 // 3. Hvis innlegget ikke finnes, kall `notFound()`.
 // 4. Bytt ut mock-data med ekte data.
 async function getPost(slug: string) {
-  // Foreløpig mock data
-  if (slug === "ikke-funnet") return null;
-  return {
-    title: "Mitt første innlegg",
-    content:
-      "# Hei Verden!\n\nDette er innholdet i mitt første innlegg. Det støtter **markdown**!",
-  };
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from("posts")
+    .select("title, content")
+    .eq("slug", slug)
+    .single();
+
+  if (error || !data) return null;
+  return data;
 }
 
 // TODO: Render MDX-innholdet trygt.
@@ -38,8 +43,7 @@ export default async function BlogPostPage({
   return (
     <article className="prose lg:prose-xl">
       <h1>{post.title}</h1>
-      {/* Erstatt denne div-en med MDXRemote-komponenten */}
-      <div>{post.content}</div>
-    </article>
+      <MDXRemote source={post.content}
+        components={mdxComponents} />    </article>
   );
 }
