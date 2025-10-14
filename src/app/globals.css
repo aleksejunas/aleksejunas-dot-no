@@ -89,9 +89,13 @@ body {
 .action-button:hover,
 .action-button:focus-visible {
   transform: translate(-3px) scale(1.015);
-  border-color: var(--accent);
-  background: color-mix(in oklab, var(--accent) 25%, var(--backround) 75%);
-  color: color-mix(in oklab, var(--foreground) 85%, var(--background) 15%);
+  border: 2px solid
+    color-mix(in oklab, var(--accent) 30%, var(--background) 70%);
+  background: color-mix(in oklab, var(--background) 80%, var(--accent) 20%);
+  color: var(--foreground);
+  /* border-color: var(--accent); */
+  /* background: color-mix(in oklab, var(--accent) 25%, var(--backround) 75%); */
+  /* color: color-mix(in oklab, var(--foreground) 85%, var(--background) 15%); */
   box-shadow: 0 14px 30px rgba(0, 0, 0, 0.12);
 }
 
