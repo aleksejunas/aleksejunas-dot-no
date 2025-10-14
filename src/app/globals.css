@@ -39,9 +39,12 @@ body {
   color: var(--foreground);
 }
 
-
 /* Fokusring som ikke er stygg */
-:where(a, button, [tabindex]:not([tabindex="-1"]):not(.no-focus-outline)):focus {
+:where(
+  a,
+  button,
+  [tabindex]:not([tabindex="-1"]):not(.no-focus-outline)
+):focus {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
 }
