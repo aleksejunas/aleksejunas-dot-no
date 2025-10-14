@@ -54,7 +54,7 @@ export default async function BlogIndexPage() {
             posts.map((post) => (
               <li key={post.slug}>
                 <Link href={`/blog/${post.slug}`}>
-                  <span className="font-sans font-bold text-4xl sm:text-5xl lg:text-7xl leading-none capitalize transition hover:text-accent hover:opacity-80 focus:outline-none">
+                  <span className="font-sans font-bold text-4xl sm:text-5xl lg:text-7xl leading-none capitalize transition hover:text-accent hover:text-rose-400 hover:opacity-90 focus:outline-none">
                     {post.title}
                   </span>
                 </Link>
