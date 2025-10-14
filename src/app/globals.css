@@ -11,6 +11,16 @@
   --accent-hover: #ff6b9a; /* rose-300 */
   --muted: #6b7280; /* slate-500ish */
 
+  --button-background: var(--accent);
+  --button-background-hover: var(--accent-hover);
+  --button-text: var(--foreground);
+  --button-text-hover: var(--foreground);
+  --button-border: var(--accent-hover);
+  --button-border-hover: var(--accent-hover);
+  --button-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.08);
+  --button-shadow-hover: 0 4px 12px 0 rgba(0, 0, 0, 0.12);
+  --button-shadow-active: 0 2px 8px 0 rgba(0, 0, 0, 0.16);
+
   color-scheme: light;
 }
 
@@ -47,6 +57,60 @@ body {
 ):focus {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
+}
+
+/* .action-button styles for light and dark mode harmony */
+.action-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  gap: 0.75rem;
+  padding: 0.75rem 2.25rem;
+  border-radius: 8px;
+  border: 1px solid color-mix(in oklab, var(--accent) 60%, transparent);
+  background: color-mix(in oklab, var(--accent) 60%, transparent);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans);
+  font-size: clamp(0.9rem, 0.8vw + 0.7rem, 1.1rem);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition:
+    transform 140ms ease,
+    boder-color 160ms ease,
+    background 160ms ease,
+    color 160ms ease,
+    box-shadow 200ms ease;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+.action-button:hover,
+.action-button:focus-visible {
+  transform: translate(-3px) scale(1.015);
+  border-color: var(--accent);
+  background: color-mix(in oklab, var(--accent) 25%, var(--backround) 75%);
+  color: color-mix(in oklab, var(--foreground) 85%, var(--background) 15%);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.12);
+}
+
+.action-button:active {
+  transform: translateY(0) scale(0.985);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.12);
+}
+
+.action-button::after {
+  content: ".";
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 8px;
+  background: color-mix(in oklab, var(--accent) 70%, var(--foreground) 30%);
+  color: transparent;
+  box-shadow: 0 0 0 4px color-mix(in oklab, var(--accent) 15%, transparent);
 }
 
 /* Secondary text and small details */

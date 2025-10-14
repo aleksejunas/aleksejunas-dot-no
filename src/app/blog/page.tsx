@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
+import ActionButton from "@/components/buttons/ActionButton";
 
 // TODO: Implementer henting av publiserte blogginnlegg fra Supabase.
 // 1. Importer og bruk `createClient` fra `lib/supabase/server`.
@@ -21,12 +22,6 @@ async function getPublishedPosts() {
   }
 
   return data ?? [];
-
-  // Foreløpig mock data
-  // return [
-  //   { title: "Mitt første publiserte innlegg", slug: "mitt-forste-innlegg" },
-  //   { title: "Et annet spennende innlegg", slug: "et-annet-innlegg" },
-  // ];
 }
 
 export default async function BlogIndexPage() {
@@ -37,11 +32,12 @@ export default async function BlogIndexPage() {
       {/* Left Column - Used for spacing/alignment, similar to the main page */}
       <section className="text-sm border-r border-foreground/50 pr-6">
         <h1 className="font-sans font-bold text-xl uppercase rotate-180 [writing-mode:vertical-rl] space-y-4">
-          Blogg
+          Blog
         </h1>
       </section>
       {/* Right Column - Contains the main blog list content */}
       <section className="flex flex-col justify-center gap-6 pl-6">
+        <ActionButton label="Nytt innlegg" href="/admin/blog/new" />
         <h2 className="text-xl font-thin font-sans tracking-wide uppercase">
           Alle innlegg
         </h2>
