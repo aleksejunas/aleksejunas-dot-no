@@ -6,21 +6,21 @@ This document explains how the main pieces of the `aleksejunas-dot-no` codebase 
 - Next.js 15 (App Router, Turbopack-based dev server) with TypeScript.
 - React 19.
 - Tailwind CSS v4 with global theme tokens defined in `src/app/globals.css`.
-- Supabase for authentication and (future) blog data persistence.
-- MDX support via `@next/mdx`, custom MDX components in `mdx-components.tsx`, and MDX content stored in `src/markdown`.
-- Framer Motion for entrance/hover animations of key navigation links.
+- Supabase for authentication and blog data, using server/browser helpers in `src/lib/supabase/server.ts` and `src/lib/supabase.ts`.
+- MDX support via `@next/mdx` plus runtime rendering through `next-mdx-remote/rsc`; content lives in `src/markdown` with global overrides in `mdx-components.tsx`.
+- Framer Motion drives animated navigation links, while social icons on the landing page use `react-icons`.
 
 ## High-Level Flow
 1. **Routing & Layout**
    - App Router entry lives in `src/app/layout.tsx`, which wires up font variables and injects `HomeLink` on every page.
    - `src/app/globals.css` pulls in Tailwind and defines design tokens (background/foreground colors, fonts) that Tailwind classes reference.
 2. **Public Pages**
-   - `src/app/page.tsx` renders the landing page, using `EnterAnimation` for animated nav links to `/blog`, `/works`, `/about`, `/contact`, and `/mdx`.
+   - `src/app/page.tsx` renders a two-column landing page. The left column shows contact info and social links using `AnimatedIconLink` (wrapping `react-icons`), while the right column animates navigation to `/blog`, `/works`, `/about`, `/contact`, and `/mdx` via `EnterAnimation`.
    - `/about`, `/works`, and `/contact` currently return placeholder pages (`src/app/<route>/page.tsx`).
    - `/mdx` (`src/app/mdx/page.tsx`) imports `src/markdown/welcome.mdx`, overriding selected headings via the `components` prop to showcase MDX rendering.
 3. **Blog (public)**
-   - `/blog/page.tsx` is stubbed to fetch published posts. Once TODOs are completed it should use `createClient` from `src/lib/supabase/server.ts` to query the `posts` table and render links to `/blog/[slug]`.
-   - `/blog/[slug]/page.tsx` currently returns mock data and awaits integration with Supabase plus `next-mdx-remote/rsc` for safe MDX rendering.
+   - `/blog/page.tsx` uses the server `createClient` helper to query `posts` (title + slug ordered by `created_at`). Fallback UI shows `Ingen publiserte innlegg` when Supabase returns no rows, and an `ActionButton` links to `/admin/blog/new`.
+   - `/blog/[slug]/page.tsx` fetches a single post from Supabase. Missing posts trigger `notFound()`. The MDX `content` field renders via `<MDXRemote>` with `mdx-components.tsx` overrides and finishes with an `ActionButton` back to `/blog`.
 4. **Authentication**
    - `/login/page.tsx` is a client component; it creates a browser Supabase client via `src/lib/supabase.ts` and triggers `auth.signInWithOAuth({ provider: "google" })` with a callback to `/auth/callback`.
    - `/auth/callback/route.ts` exchanges the Supabase OAuth code for a session and redirects the user (default `/`).
@@ -33,9 +33,11 @@ This document explains how the main pieces of the `aleksejunas-dot-no` codebase 
 6. **Shared Utilities & Components**
    - `src/components/navigation/HomeLink.tsx` is a client component that hides itself on the homepage and renders a floating button back to `/`.
    - `src/components/motion/EnterAnimation.tsx` wraps children in a Framer Motion span with default enter animation.
+   - `src/components/motion/AnimatedIconsLink.tsx` provides hover animations for external icon links used on the landing page.
+   - `src/components/buttons/ActionButton.tsx` defines the CTA button used on blog/admin pages; supporting styles live alongside design tokens in `globals.css`.
    - `src/components/icons/Home.tsx` contains the SVG icon used by `HomeLink`.
-   - `mdx-components.tsx` provides global MDX component overrides (e.g., styled `<h1>` and `<img>` tags); pages can pass additional overrides like the `/mdx` demo.
-   - `src/lib/supabase/server.ts` centralises SSR client creation with cookie rehydration compatible with Next 15's async `cookies()` API.
+   - `mdx-components.tsx` provides global MDX component overrides (e.g., styled `<h1>`); pages can pass additional overrides like the `/mdx` demo.
+   - `src/lib/supabase/server.ts` centralises SSR client creation with cookie rehydration compatible with Next 15's async `cookies()` API, while `src/lib/supabase.ts` exposes the browser client for OAuth flows.
 
 ## Supporting Files & Conventions
 - **Configuration**
@@ -46,6 +48,8 @@ This document explains how the main pieces of the `aleksejunas-dot-no` codebase 
   - `docs/database_schema.md` stores the SQL for Supabase `posts` plus RLS policies.
   - `docs/notes.md` currently includes Supabase credentials (should be rotated/moved out of the repo).
   - `docs/todos.ts` is a TypeScript file doubling as a TODO list for outstanding blog features.
+- **Styling**
+  - `.action-button` styles and light/dark theme tokens are defined in `src/app/globals.css`, which pairs with Tailwind utilities.
 
 ## Environment Expectations
 Set the following environment variables (preferably through `.env.local`) for Supabase integrations:
@@ -69,5 +73,6 @@ Use pnpm scripts defined in `package.json`:
 
 ## Open Tasks
 1. Rotate the temporary Supabase credentials currently stored in `docs/notes.md` and move them into environment variables.
+2. Replace mock data/TODOs in the admin blog pages with real Supabase reads and mutations (`getPosts`, `getPost`, delete flow).
 
 Refer back to this map whenever you need to understand how a change affects related files or flows.

@@ -5,13 +5,14 @@ import { updatePost } from "@/lib/actions";
 // 2. Hent innlegget fra `posts`-tabellen der `slug` matcher `params.slug`.
 // 3. Håndter tilfellet der innlegget ikke finnes (f.eks. vis en 404-side).
 // 4. Send `post`-dataen som en prop til komponenten.
+// TODO: Delete this mock data
 async function getPost(slug: string) {
   // Foreløpig mock data
   return {
-    id: '1',
-    title: 'Mitt første innlegg',
-    slug: 'mitt-forste-innlegg',
-    content: '# Hei verden!\n\nDette er mitt første innlegg.',
+    id: "1",
+    title: "Mitt første innlegg",
+    slug: "mitt-forste-innlegg",
+    content: "# Hei verden!\n\nDette er mitt første innlegg.",
   };
 }
 
@@ -20,7 +21,11 @@ async function getPost(slug: string) {
 // 2. Kall `updatePost` med postens ID og de nye skjemadataene.
 // 3. Fyll ut `defaultValue` for hvert felt med data fra `post`-objektet.
 
-export default async function EditPostPage({ params }: { params: { slug: string } }) {
+export default async function EditPostPage({
+  params,
+}: {
+  params: { slug: string };
+}) {
   const post = await getPost(params.slug);
 
   return (
@@ -28,7 +33,12 @@ export default async function EditPostPage({ params }: { params: { slug: string 
       <h1 className="text-2xl font-bold">Rediger innlegg</h1>
 
       <div>
-        <label htmlFor="title" className="block text-sm font-medium text-gray-700">Tittel</label>
+        <label
+          htmlFor="title"
+          className="block text-sm font-medium text-gray-700"
+        >
+          Tittel
+        </label>
         <input
           type="text"
           name="title"
@@ -40,7 +50,12 @@ export default async function EditPostPage({ params }: { params: { slug: string 
       </div>
 
       <div>
-        <label htmlFor="slug" className="block text-sm font-medium text-gray-700">Slug</label>
+        <label
+          htmlFor="slug"
+          className="block text-sm font-medium text-gray-700"
+        >
+          Slug
+        </label>
         <input
           type="text"
           name="slug"
@@ -52,7 +67,12 @@ export default async function EditPostPage({ params }: { params: { slug: string 
       </div>
 
       <div>
-        <label htmlFor="content" className="block text-sm font-medium text-gray-700">Innhold (MDX)</label>
+        <label
+          htmlFor="content"
+          className="block text-sm font-medium text-gray-700"
+        >
+          Innhold (MDX)
+        </label>
         <textarea
           name="content"
           id="content"
@@ -72,3 +92,4 @@ export default async function EditPostPage({ params }: { params: { slug: string 
     </form>
   );
 }
+
