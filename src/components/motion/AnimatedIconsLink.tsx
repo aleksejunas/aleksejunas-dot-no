@@ -3,21 +3,22 @@ import React, { useState } from "react";
 type AnimatedIconLinkProps = {
   href: string;
   label: string;
+  shortLabel?: string; // e.g., "GH"
   Icon: React.ComponentType<{ size?: number }>;
   animationDuration?: string; // e.g., "0.5s"
   iconSize?: number; // e.g., 32
-  width?: string | number; // e.g., "2.5em" or 40
-  height?: string | number; // e.g., "2.5em" or 40
+  hoverColor?: string; // e.g., css color variable
 };
 
 const AnimatedIconLink = ({
   href,
   label,
+  shortLabel,
   Icon,
   animationDuration = "0.5s",
   iconSize = 32,
-  width = "2.5em",
-  height = "2.5em",
+  // TODO: Change from hardcoded to CSS color variable
+  hoverColor = "#f43f5e", // Tailwind rose-500
 }: AnimatedIconLinkProps) => {
   const [hovered, setHovered] = useState(false);
 
@@ -26,49 +27,35 @@ const AnimatedIconLink = ({
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="text-foreground font-bold uppercase focus:outline-none"
+      className="focus:outline-none"
       style={{
-        position: "relative",
-        display: "inline-block",
-        width,
-        height,
-        minWidth: width,
-        minHeight: height,
-        verticalAlign: "top",
-        textAlign: "left",
-        overflow: "hidden",
+        display: "inline-flex",
+        alignItems: "center",
+        cursor: "pointer",
+        transition: `box-shadow ${animationDuration}`,
+        borderRadius: "0.5em",
+        padding: "0.25em",
       }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
+      onFocus={() => setHovered(true)}
+      onBlur={() => setHovered(false)}
     >
       <span
         style={{
-          position: "absolute",
-          inset: 0,
-          display: "flex",
+          display: "inline-flex",
           alignItems: "center",
           justifyContent: "center",
-          opacity: hovered ? 0 : 1,
-          transform: hovered ? "rotate(0deg)" : "rotate(-90deg)",
-          transition: `opacity ${animationDuration}, transform ${animationDuration}`,
-          width: "100%",
-          height: "100%",
-        }}
-      >
-        {label}
-      </span>
-      <span
-        style={{
-          position: "absolute",
-          inset: 0,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          opacity: hovered ? 1 : 0,
-          transform: "rotate(0deg)", // Always upright
-          transition: `opacity ${animationDuration}, transform ${animationDuration}`,
-          width: "100%",
-          height: "100%",
+          width: iconSize,
+          height: iconSize,
+          borderRadius: "50%",
+          transition: `transform ${animationDuration}, color ${animationDuration}`,
+          transform: hovered ? "scale(1.15) translateY(-2px)" : "scale(1)",
+          boxShadow: hovered
+            ? `0 4px 16px 0 ${hoverColor}33`
+            : "0 2px 8px 0 #00000011",
+          color: hovered ? hoverColor : "inherit",
+          backgroundColor: "transparent",
         }}
       >
         <Icon size={iconSize} />

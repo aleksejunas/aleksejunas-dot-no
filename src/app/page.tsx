@@ -22,24 +22,20 @@ const HomePage = () => {
       <section className="flex flex-col justify-between p-6 text-sm">
         {/* <div className="rotate-180 [writing-mode:vertical-rl] space-y-4"> */}
         <div className="flex flex-col  gap-4">
-          {/* TODO: Add animation that spins the link text from vertical to horizontal position on hover */}
+          {/* TODO: Subtle animation of the icons on hover */}
           <AnimatedIconLink
             href="https://github.com/aleksejunas"
             label="GH"
             Icon={FaGithub}
             animationDuration="0.7s"
             iconSize={40}
-            width="2.5em"
-            height="2.5em"
           />
           <AnimatedIconLink
             href="https://linkedin.com/in/rolfdeveloper/"
             label="LI"
             Icon={FaLinkedin}
             animationDuration="0.7s"
-            iconSize={40}
-            width="2.5em"
-            height="2.5em"
+            iconSize={32}
           />
         </div>
         <div>
