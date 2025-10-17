@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import mdxComponents from "@/components/mdx-components"; //  Lag denne filen hvis jeg vil ha custom komponenter
+import ActionButton from "@/components/buttons/ActionButton";
 
 // TODO: Installer og sett opp `next-mdx-remote`.
 // Kjør `pnpm add next-mdx-remote`.
@@ -41,9 +42,14 @@ export default async function BlogPostPage({
   }
 
   return (
-    <article className="prose lg:prose-xl">
-      <h1>{post.title}</h1>
-      <MDXRemote source={post.content}
-        components={mdxComponents} />    </article>
+    <main>
+      <article className="prose lg:prose-xl">
+        <h1>{post.title}</h1>
+        <MDXRemote source={post.content} components={mdxComponents} />{" "}
+      </article>
+      <div className="mt-8">
+        <ActionButton label="Back to Blog" href="/blog" />
+      </div>
+    </main>
   );
 }

@@ -1,5 +1,8 @@
+"use client";
 import Link from "next/link";
 import EnterAnimation from "@/components/motion/EnterAnimation";
+import AnimatedIconLink from "@/components/motion/AnimatedIconsLink";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
 
 const links = {
   BLOG: "/blog",
@@ -17,22 +20,27 @@ const HomePage = () => {
     <main className="grid min-h-screen grid-cols-[1fr_1fr] bg-background text-[#111] dark:bg-background dark:text-[#ECE7E1] overflow-hidden">
       {/* Left column */}
       <section className="flex flex-col justify-between p-6 text-sm">
-        <div className="rotate-180 [writing-mode:vertical-rl] space-y-4">
+        {/* <div className="rotate-180 [writing-mode:vertical-rl] space-y-4"> */}
+        <div className="flex flex-col  gap-4">
           {/* TODO: Add animation that spins the link text from vertical to horizontal position on hover */}
-          <a
+          <AnimatedIconLink
             href="https://github.com/aleksejunas"
-            target="_blank"
-            className="text-foreground font-bold uppercase hover:text-rose-400 focus:outline-none transition-transform transform hover:rotate-0 hover:-translate-y-4"
-          >
-            GH
-          </a>
-          <a
+            label="GH"
+            Icon={FaGithub}
+            animationDuration="0.7s"
+            iconSize={40}
+            width="2.5em"
+            height="2.5em"
+          />
+          <AnimatedIconLink
             href="https://linkedin.com/in/rolfdeveloper/"
-            target="_blank"
-            className="text-foreground font-bold uppercase hover:text-rose-400 focus:outline-none transition-transform transform hover:rotate-0 hover:-translate-y-4"
-          >
-            LI
-          </a>
+            label="LI"
+            Icon={FaLinkedin}
+            animationDuration="0.7s"
+            iconSize={40}
+            width="2.5em"
+            height="2.5em"
+          />
         </div>
         <div>
           {myName.map((part, idx) => (
