@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Arapey } from "next/font/google";
 import HomeLink from "@/components/navigation/HomeLink";
 import "./globals.css";
+import PunkThemeToggleButton from "@/components/buttons/PunkThemeToggleButton";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,9 +29,22 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
+  const themeInit = `
+    (function() {
+      try {
+        var t = localStorage.getItem('theme');
+        if (t && t !== 'system') {
+          document.documentElement.setAttribute('data-style', t); 
+          else {
+            document.documentElement.removeAttribute('data-style'); // Let system win
+          }
+        } catch (__) {}
+      }
+    });
+  `;
   return (
     <html lang="en">
       <body
@@ -40,6 +54,7 @@ export default function RootLayout({
           <HomeLink />
           {children}
         </main>
+        <PunkThemeToggleButton />
       </body>
     </html>
   );

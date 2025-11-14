@@ -2,11 +2,14 @@
 @plugin "@tailwindcss/typography";
 
 :root {
+  color-scheme: light dark;
+}
+
+:root {
   /* --- LIGHT MODE --- */
   --background: #fff6c2; /* yellow-200 */
   /* --background: #fcd34d For more Poster look (yellow-300) */
   --foreground: #1a1a1a;
-
   --accent: #ff8fab; /* rose-400 */
   --accent-hover: #ff6b9a; /* rose-300 */
   --muted: #6b7280; /* slate-500ish */
@@ -39,8 +42,34 @@
     --foreground: #ededed;
     --accent: #fb7185; /* also works in dark-mode */
     --accent-hover: #fda4af;
-    color-scheme: dark;
+    /* color-scheme: dark; */
   }
+}
+
+/* --- PUNK VARIANT --- */
+:root[data-style="punk"] {
+  --background: #fff600; /* Safety Yellow */
+  --foreground: #000;
+  --accent: #ff0054; /* Safety Pink */
+  --accent-hover: #ff4b80;
+  --muted: #111;
+}
+/* @media (prefers-color-scheme: dark) { */
+/*   :root[data-style="punk"] { */
+/*     --background: #0e0e0e; */
+/*     --foreground: #fefefe; */
+/*     --accent: #ff0054; */
+/*     --accent-hover: #ff4b80; */
+/*     --muted: #ccc; */
+/*   } */
+/* } */
+
+:root[data-style="midnight"] {
+  --background: #0b0d10;
+  --foreground: #eaeaea;
+  --accent: #7dd3fc;
+  --accent-hover: #38bdf8;
+  --muted: #94a3b8;
 }
 
 /* Base */
@@ -79,7 +108,7 @@ body {
   text-decoration: none;
   transition:
     transform 140ms ease,
-    boder-color 160ms ease,
+    border-color 160ms ease,
     background 160ms ease,
     color 160ms ease,
     box-shadow 200ms ease;
@@ -129,4 +158,16 @@ figcaption {
 ::selection {
   background: color-mix(in oklab, var(--accent) 35%, transparent);
   color: var(--foreground);
+}
+
+.skull {
+  display: inline-block;
+  font-size: 1.5rem; /* or whatever size works */
+  text-shadow:
+    -1px -1px 0 var(--background),
+    1px -1px 0 var(--background),
+    -1px 1px 0 var(--background),
+    1px 1px 0 var(--background);
+  filter: drop-shadow(2px 3px 0 rgba(0, 0, 0, 0.5));
+  transform: rotate(5deg);
 }
