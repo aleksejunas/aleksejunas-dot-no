@@ -1,5 +1,3 @@
-import { updatePost } from "@/lib/actions";
-
 // TODO: Implementer henting av ett spesifikt blogginnlegg basert på slug.
 // 1. Importer og bruk `createClient` fra `lib/supabase/server`.
 // 2. Hent innlegget fra `posts`-tabellen der `slug` matcher `params.slug`.
@@ -10,8 +8,8 @@ async function getPost(slug: string) {
   // Foreløpig mock data
   return {
     id: "1",
-    title: "Mitt første innlegg",
-    slug: "mitt-forste-innlegg",
+    title: `Mitt første innlegg (${slug})`,
+    slug,
     content: "# Hei verden!\n\nDette er mitt første innlegg.",
   };
 }
@@ -92,4 +90,3 @@ export default async function EditPostPage({
     </form>
   );
 }
-

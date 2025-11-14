@@ -1,6 +1,7 @@
 import { test, expect } from "@playwright/test";
 
-test("homepage loads and shows site title", async ({ page }) => {
+test("homepage links render as navigation tiles", async ({ page }) => {
   await page.goto("/");
-  await expect(page).toHaveTitle(/aleksejunas-dot-no/i);
+  await expect(page.getByRole("link", { name: "BLOG" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "WORKS" })).toBeVisible();
 });

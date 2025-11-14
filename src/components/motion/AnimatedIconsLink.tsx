@@ -60,6 +60,7 @@ const AnimatedIconLink = ({
       >
         <Icon size={iconSize} />
       </span>
+      <span className="sr-only">{shortLabel ?? label}</span>
     </a>
   );
 };

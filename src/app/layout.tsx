@@ -32,19 +32,6 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const themeInit = `
-    (function() {
-      try {
-        var t = localStorage.getItem('theme');
-        if (t && t !== 'system') {
-          document.documentElement.setAttribute('data-style', t); 
-          else {
-            document.documentElement.removeAttribute('data-style'); // Let system win
-          }
-        } catch (__) {}
-      }
-    });
-  `;
   return (
     <html lang="en">
       <body
