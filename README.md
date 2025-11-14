@@ -1,36 +1,43 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# aleksejunas-dot-no
 
-## Getting Started
+Personal portfolio built with the Next.js App Router, Tailwind v4, and strict TypeScript. The project follows the conventions documented in `AGENTS.md`.
 
-First, run the development server:
+## Development
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+pnpm install
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The dev server boots with Turbopack at [http://localhost:3000](http://localhost:3000). Edit files under `src/app/**` and the browser will hot-reload automatically.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Local CI/CD Pipeline
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Use `scripts/ci-local.sh` to replicate the GitHub Actions workflow before pushing:
 
-## Learn More
+```bash
+./scripts/ci-local.sh
+```
 
-To learn more about Next.js, take a look at the following resources:
+By default the script runs `pnpm install --frozen-lockfile`, `pnpm lint`, `pnpm exec playwright test`, and `pnpm build`. Add `--skip-*` flags or `--only=<step>` to tailor the run, e.g. `./scripts/ci-local.sh --skip-tests` while iterating on lint fixes. Use `./scripts/ci-local.sh --help` to see all options.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+If Playwright browsers are missing locally, install them once via `pnpm exec playwright install --with-deps`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Testing
 
-## Deploy on Vercel
+End-to-end tests live under `tests/*.spec.ts` and run through Playwright:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+pnpm exec playwright test
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Keep specs independent, mock Supabase calls, and lean on `expect.poll` for UI assertions that depend on viewport changes.
+
+## Production build
+
+```bash
+pnpm build
+pnpm start
+```
+
+Use this combo to verify deployment readiness. Attach build artifacts in CI as described in `AGENTS.md` and consume them from deployment scripts (e.g. `scripts/deploy.sh`) when promoting to prod.

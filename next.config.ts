@@ -3,8 +3,13 @@ import createMDX from "@next/mdx";
 
 /** @type {import('next').NextConfig} */
 const nextConfig: NextConfig = {
-  /* Optionally, add any other config options here */
-  experimental: { mdxRs: true },
+  experimental: {
+    mdxRs: true,
+  },
+  turbopack: {
+    // Force Turbopack to treat this directory as the workspace root to silence dev warnings.
+    root: __dirname,
+  },
   // Configure 'pageExtensions' to include markdown and MDX files
   pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
 };
