@@ -86,6 +86,20 @@ export async function updatePost(postId: string, formData: FormData) {
   redirect(`/blog/${redirectSlug}`);
 }
 
+// ***** deletePostAction******:
+//   A server action specifically designed for use with Next.js
+//   `<form action={...}>`. It receives a `FormData` object,
+//   extracts the postId, validates it, and then calls `deletePost`.
+//   This makes it compatible with Next.js server actions and form submissions.
+
+export async function deletePostAction(formData: FormData) {
+  const postId = formData.get("postId");
+  if (!postId || typeof postId !== "string") {
+    throw new Error("Invalid post ID");
+  }
+  await deletePost(postId);
+}
+
 // TODO: Implementer funksjonen for å slette et blogginnlegg.
 // 1. Bruk `createClient()` for å få en Supabase-klient.
 // 2. Kall `supabase.from('posts').delete().eq('id', postId)`.

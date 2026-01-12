@@ -1,8 +1,15 @@
+// src/app/blog/[slug]/page.tsx
+// ----- This file renders a single blog post -----
+
+"use server";
+
 import { notFound } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import mdxComponents from "@/components/mdx-components"; //  Lag denne filen hvis jeg vil ha custom komponenter
 import ActionButton from "@/components/buttons/ActionButton";
+import { deletePost, deletePostAction } from "@/lib/actions";
+// import DeletePostButton from "@/components/buttons/DeletePostButton";
 
 // TODO: Installer og sett opp `next-mdx-remote`.
 // Kjør `pnpm add next-mdx-remote`.
@@ -12,11 +19,18 @@ import ActionButton from "@/components/buttons/ActionButton";
 // 2. Hent innlegget (spesielt `content`-feltet) basert på `params.slug`.
 // 3. Hvis innlegget ikke finnes, kall `notFound()`.
 // 4. Bytt ut mock-data med ekte data.
+
+async function getUser() {
+  const supabase = await createClient();
+  const { data } = await supabase.auth.getUser();
+  return data.user;
+}
+
 async function getPost(slug: string) {
   const supabase = await createClient();
   const { data, error } = await supabase
     .from("posts")
-    .select("title, content")
+    .select("id,title, content")
     .eq("slug", slug)
     .single();
 
@@ -32,23 +46,54 @@ async function getPost(slug: string) {
 export default async function BlogPostPage({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: { slug: string };
 }) {
   const { slug } = await params;
   const post = await getPost(slug);
+  const user = await getUser();
 
   if (!post) {
     notFound();
   }
 
+  // Check if user is logged in and admin or not
+  const isLoggedIn = !!user;
+  const isAdmin = user?.user_metadata?.role === "admin";
+
   return (
     <main>
       <article className="prose lg:prose-xl">
         <h1>{post.title}</h1>
-        <MDXRemote source={post.content} components={mdxComponents} />{" "}
+        <MDXRemote source={post.content} components={mdxComponents} />
       </article>
-      <div className="mt-8">
+      <div className="mt-8 flex gap-4">
+        {user && (
+          <form action={deletePostAction}>
+            <input type="hidden" name="postId" value={post.id} />
+            <button type="submit">Delete</button>
+          </form>
+        )}
+
         <ActionButton label="Back to Blog" href="/blog" />
+        {isLoggedIn ||
+          (isAdmin && (
+            <>
+              <ActionButton
+                label="Rediger"
+                href={`/admin/blog/edit/${params.slug}`}
+                className="text-blue-500 hover:underline"
+              />
+              <form action={deletePostAction}>
+                <input type="hidden" name="postId" value={post.id} />
+                <button
+                  type="submit"
+                  className="text-red-500 hover:underline ml-2"
+                >
+                  Slett
+                </button>
+              </form>
+            </>
+          ))}
       </div>
     </main>
   );
