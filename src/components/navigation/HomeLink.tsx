@@ -9,10 +9,12 @@ const HomeLink = () => {
   if (pathname === "/") return null;
 
   return (
-    <Link href="/">
-      <div className="absolute top-6 right-6  cursor-pointer">
-        <Home className="h-10 2-10 fill-black dark:fill-white" />
-      </div>
+    <Link
+      href="/"
+      aria-label="Back to home"
+      className="inline-flex rounded-full p-2 transition hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+    >
+      <Home className="h-10 w-10 fill-black dark:fill-white" />
     </Link>
   );
 };
