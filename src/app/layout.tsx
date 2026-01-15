@@ -44,8 +44,8 @@ export default function RootLayout({
           </div>
           {children}
         </main>
-        {/* <PunkThemeToggleButton /> */}
         <div className="fixed bottom-4 left-4">
+          <PunkThemeToggleButton />
           <AuthStatusDot />
         </div>
       </body>
