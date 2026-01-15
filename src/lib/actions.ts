@@ -86,6 +86,28 @@ export async function updatePost(postId: string, formData: FormData) {
   redirect(`/blog/${redirectSlug}`);
 }
 
+// TODO: Implementer henting av publiserte blogginnlegg fra Supabase.
+// 1. Importer og bruk `createClient` fra `lib/supabase/server`.
+// 2. Hent alle innlegg fra `posts`-tabellen, kun `title` og `slug`, sortert etter `created_at`.
+// 3. Håndter eventuelle feil.
+// 4. Bytt ut mock-dataen med de ekte postene.
+
+export async function getPublishedPosts() {
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from("posts")
+    .select("title, slug")
+    .order("created_at", { ascending: false });
+
+  if (error) {
+    // Optionally log or handle the console.error
+    console.error("Failed to fetch posts:", error.message);
+    return [];
+  }
+
+  return data ?? [];
+}
+
 // ***** deletePostAction******:
 //   A server action specifically designed for use with Next.js
 //   `<form action={...}>`. It receives a `FormData` object,

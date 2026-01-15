@@ -1,5 +1,9 @@
 import Link from "next/link";
-import { deletePost, deletePostAction } from "../../../lib/actions";
+import {
+  deletePost,
+  deletePostAction,
+  getPublishedPosts,
+} from "../../../lib/actions";
 
 // TODO: Implementer henting av blogginnlegg fra Supabase.
 // 1. Importer og bruk `createClient` fra `lib/supabase/server`.
@@ -8,16 +12,16 @@ import { deletePost, deletePostAction } from "../../../lib/actions";
 // 4. Map gjennom `posts`-arrayet og render en liste med innlegg.
 // 5. For hvert innlegg, vis tittel og lenker til `edit` og en knapp for `delete`.
 
-async function getPosts() {
-  // Foreløpig mock data
-  return [
-    { id: "1", title: "Mitt første innlegg", slug: "mitt-forste-innlegg" },
-    { id: "2", title: "Et annet innlegg", slug: "et-annet-innlegg" },
-  ];
-}
+// async function getPosts() {
+//   // Foreløpig mock data
+//   return [
+//     { id: "1", title: "Mitt første innlegg", slug: "mitt-forste-innlegg" },
+//     { id: "2", title: "Et annet innlegg", slug: "et-annet-innlegg" },
+//   ];
+// }
 
 export default async function AdminBlogPage() {
-  const posts = await getPosts();
+  const posts = await getPublishedPosts();
 
   // Server action for deleting a post
   async function handleDelete(formData: FormData) {
