@@ -1,0 +1,14 @@
+feat: consolidate and fix delete blog post buttons
+
+- Consolidated 3 duplicate delete implementations into single DeletePostButton component
+- Fixed nested forms HTML validation error by using direct server action calls
+- Added ActionButton styling support with useActionButtonStyle prop
+- Maintained confirmation dialogs and added loading state with useTransition
+- Cleaned up blog post page and admin blog page to use consistent component
+- Removed unused DeletePostForm component
+
+Files changed:
+- src/components/buttons/DeletePostButton.tsx (restructured)
+- src/app/blog/[slug]/page.tsx (cleaned up)
+- src/app/admin/blog/page.tsx (updated)
+- docs/project-map.md (documented)

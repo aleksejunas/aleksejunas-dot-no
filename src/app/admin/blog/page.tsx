@@ -1,9 +1,9 @@
 import Link from "next/link";
 import {
-  deletePost,
   deletePostAction,
   getPublishedPosts,
 } from "../../../lib/actions";
+import DeletePostButton from "@/components/buttons/DeletePostButton";
 
 // TODO: Implementer henting av blogginnlegg fra Supabase.
 // 1. Importer og bruk `createClient` fra `lib/supabase/server`.
@@ -23,12 +23,7 @@ import {
 export default async function AdminBlogPage() {
   const posts = await getPublishedPosts();
 
-  // Server action for deleting a post
-  async function handleDelete(formData: FormData) {
-    "use server";
-    const postId = formData.get("postId") as string;
-    await deletePost(postId);
-  }
+
 
   return (
     <div className="space-y-8">
@@ -56,10 +51,7 @@ export default async function AdminBlogPage() {
               >
                 Rediger
               </Link>
-              <form action={deletePostAction}>
-                <input type="hidden" name="postId" value={post.id} />
-                <button type="submit">Delete</button>
-              </form>
+              <DeletePostButton postId={post.id} action={deletePostAction} useActionButtonStyle={false} />
             </div>
           </li>
         ))}

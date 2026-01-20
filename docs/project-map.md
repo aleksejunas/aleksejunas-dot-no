@@ -75,4 +75,26 @@ Use pnpm scripts defined in `package.json`:
 1. Rotate the temporary Supabase credentials currently stored in `docs/notes.md` and move them into environment variables.
 2. Replace mock data/TODOs in the admin blog pages with real Supabase reads and mutations (`getPosts`, `getPost`, delete flow).
 
+## Recent Improvements
+### Delete Blog Post Button Consolidation
+- **Enhanced DeletePostButton component**: Now supports both ActionButton styling (prominent) and text button styling (subtle) via the `useActionButtonStyle` prop
+- **Removed duplicate delete buttons**: Consolidated from 3 different implementations to a single, consistent DeletePostButton component
+- **Maintained confirmation dialogs**: All delete operations require user confirmation to prevent accidental deletions
+- **Fixed action usage**: Corrected usage of `deletePostAction` instead of raw `deletePost` function
+- **Improved admin UI**: Updated both blog post page and admin blog page to use the consistent DeletePostButton
+
+**Files modified**:
+- `src/components/buttons/DeletePostButton.tsx` - Enhanced with ActionButton support
+- `src/app/blog/[slug]/page.tsx` - Cleaned up duplicate buttons and fixed action usage
+- `src/app/admin/blog/page.tsx` - Updated to use DeletePostButton consistently
+
+**Usage examples**:
+```jsx
+// Prominent delete button (for main admin actions)
+<DeletePostButton postId={post.id} action={deletePostAction} useActionButtonStyle={true} />
+
+// Subtle delete button (for lists and inline actions)
+<DeletePostButton postId={post.id} action={deletePostAction} useActionButtonStyle={false} />
+```
+
 Refer back to this map whenever you need to understand how a change affects related files or flows.

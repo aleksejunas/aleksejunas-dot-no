@@ -8,8 +8,8 @@ import { createClient } from "@/lib/supabase/server";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import mdxComponents from "@/components/mdx-components"; //  Lag denne filen hvis jeg vil ha custom komponenter
 import ActionButton from "@/components/buttons/ActionButton";
-import { deletePost, deletePostAction } from "@/lib/actions";
-// import DeletePostButton from "@/components/buttons/DeletePostButton";
+import { deletePostAction, getPublishedPosts } from "@/lib/actions";
+import DeletePostButton from "@/components/buttons/DeletePostButton";
 
 // TODO: Installer og sett opp `next-mdx-remote`.
 // Kjør `pnpm add next-mdx-remote`.
@@ -25,6 +25,8 @@ async function getUser() {
   const { data } = await supabase.auth.getUser();
   return data.user;
 }
+
+getPublishedPosts();
 
 async function getPost(slug: string) {
   const supabase = await createClient();
@@ -49,7 +51,10 @@ export default async function BlogPostPage({
   params: { slug: string };
 }) {
   const { slug } = await params;
-  const post = await getPost(slug);
+  const post = await getPublishedPosts().then((posts) => {
+    return posts.find((post) => post.slug === slug);
+  });
+
   const user = await getUser();
 
   if (!post) {
@@ -64,36 +69,20 @@ export default async function BlogPostPage({
     <main>
       <article className="prose lg:prose-xl">
         <h1>{post.title}</h1>
-        <MDXRemote source={post.content} components={mdxComponents} />
+        <MDXRemote source={post.id.content} components={mdxComponents} />
       </article>
       <div className="mt-8 flex gap-4">
-        {user && (
-          <form action={deletePostAction}>
-            <input type="hidden" name="postId" value={post.id} />
-            <button type="submit">Delete</button>
-          </form>
+        <ActionButton label="Back to Blog" href="/blog" variant="backToBlog" />
+        {isLoggedIn && isAdmin && (
+          <>
+            <ActionButton
+              label="Rediger"
+              href={`/admin/blog/edit/${params.slug}`}
+              className="text-blue-500 hover:underline"
+            />
+            <DeletePostButton postId={post.id} action={deletePostAction} useActionButtonStyle={true} />
+          </>
         )}
-
-        <ActionButton label="Back to Blog" href="/blog" />
-        {isLoggedIn ||
-          (isAdmin && (
-            <>
-              <ActionButton
-                label="Rediger"
-                href={`/admin/blog/edit/${params.slug}`}
-                className="text-blue-500 hover:underline"
-              />
-              <form action={deletePostAction}>
-                <input type="hidden" name="postId" value={post.id} />
-                <button
-                  type="submit"
-                  className="text-red-500 hover:underline ml-2"
-                >
-                  Slett
-                </button>
-              </form>
-            </>
-          ))}
       </div>
     </main>
   );

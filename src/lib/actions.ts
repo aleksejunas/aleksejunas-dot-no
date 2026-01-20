@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
+ import { motion } from "framer-motion/client";
 
 // TODO: Implementer funksjonen for å lage et nytt blogginnlegg.
 // 1. Hent ut data (title, content, slug) fra `formData`.
@@ -86,7 +87,7 @@ export async function updatePost(postId: string, formData: FormData) {
   redirect(`/blog/${redirectSlug}`);
 }
 
-// TODO: Implementer henting av publiserte blogginnlegg fra Supabase.
+//  Implementer henting av publiserte blogginnlegg fra Supabase.
 // 1. Importer og bruk `createClient` fra `lib/supabase/server`.
 // 2. Hent alle innlegg fra `posts`-tabellen, kun `title` og `slug`, sortert etter `created_at`.
 // 3. Håndter eventuelle feil.
@@ -96,7 +97,7 @@ export async function getPublishedPosts() {
   const supabase = await createClient();
   const { data, error } = await supabase
     .from("posts")
-    .select("title, slug")
+    .select("id, title, slug")
     .order("created_at", { ascending: false });
 
   if (error) {
@@ -106,6 +107,21 @@ export async function getPublishedPosts() {
   }
 
   return data ?? [];
+}
+
+export async function getPostBySlug(slug: string) {
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from("posts")
+    .select("id, title, slug, content")
+    .eq("slug", slug)
+    .single();
+
+  if (error) {
+    console.error("Failed to fetch post:", error.message);
+    return null;
+  }
+  return data;
 }
 
 // ***** deletePostAction******:

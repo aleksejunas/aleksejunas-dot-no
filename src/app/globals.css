@@ -93,13 +93,13 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
+  width: auto;
   gap: 0.75rem;
   padding: 0.75rem 2.25rem;
   border-radius: 8px;
   border: 1px solid color-mix(in oklab, var(--accent) 60%, transparent);
-  background: color-mix(in oklab, var(--accent) 60%, transparent);
-  color: var(--foreground);
+  /* background: color-mix(in oklab, var(--accent) 60%, transparent); */
+  /* color: var(--foreground); */
   font-family: var(--font-geist-sans);
   font-size: clamp(0.9rem, 0.8vw + 0.7rem, 1.1rem);
   font-weight: 600;
@@ -118,10 +118,11 @@ body {
 .action-button:hover,
 .action-button:focus-visible {
   transform: translate(-3px) scale(1.015);
+  /* border: 2px solid #fc98a2; */
   border: 2px solid
     color-mix(in oklab, var(--accent) 30%, var(--background) 70%);
-  background: color-mix(in oklab, var(--background) 80%, var(--accent) 20%);
-  color: var(--foreground);
+  /* background: color-mix(in oklab, var(--background) 80%, var(--accent) 20%); */
+  /* color: var(--foreground); */
   /* border-color: var(--accent); */
   /* background: color-mix(in oklab, var(--accent) 25%, var(--backround) 75%); */
   /* color: color-mix(in oklab, var(--foreground) 85%, var(--background) 15%); */
@@ -144,6 +145,54 @@ body {
   background: color-mix(in oklab, var(--accent) 70%, var(--foreground) 30%);
   color: transparent;
   box-shadow: 0 0 0 4px color-mix(in oklab, var(--accent) 15%, transparent);
+}
+
+.action-button-primary {
+  background: var(--accent);
+  color: var(--foreground);
+}
+.action-button-primary:hover,
+.action-button-primary:focus-visible {
+  background: var(--foreground);
+  color: var(--accent);
+  border-color: var(--accent-hover);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.12);
+}
+.action-button-primary:active {
+  filter: brightness(0.92);
+  transform: scale(0.97);
+}
+
+.action-button-back {
+  background: var(--background);
+  color: var(--foreground);
+}
+.action-button-back:hover,
+.action-button-back:focus-visible {
+  background: var(--foreground);
+  color: var(--background);
+  border-color: var(--accent-hover);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.12);
+}
+.action-button-back:active {
+  filter: brightness(0.92);
+  transform: scale(0.97);
+}
+
+.action-button-danger {
+  background: var(--accent-hover);
+  color: var(--background);
+}
+.action-button-danger:hover,
+.action-button-danger:focus-visible {
+  background: var(--background);
+  color: var(--accent-hover);
+  border-color: var(--accent);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.12);
+}
+.action-button-danger:active {
+  filter: brightness(0.92);
+  transform: scale(0.97);
 }
 
 /* Secondary text and small details */

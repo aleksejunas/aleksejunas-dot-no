@@ -1,0 +1,31 @@
+feat: consolidate delete blog post buttons into unified DeletePostButton component
+
+This commit addresses the confusion caused by having 3 different delete implementations by consolidating them into a single, flexible DeletePostButton component that supports both ActionButton styling and traditional text buttons.
+
+## Changes Made:
+- Enhanced DeletePostButton component with ActionButton support via useActionButtonStyle prop
+- Removed 3 duplicate delete buttons from blog post page, consolidating to single implementation
+- Updated admin blog page to use consistent DeletePostButton component
+- Fixed action prop usage to use deletePostAction instead of raw deletePost function
+- Maintained confirmation dialogs on all delete operations for safety
+- Cleaned up unused imports and functions
+
+## Benefits:
+✅ Consistent UI/UX across all delete operations
+✅ Single source of truth for delete functionality  
+✅ Flexible styling options (prominent ActionButton or subtle text button)
+✅ Proper confirmation dialogs prevent accidental deletions
+✅ Cleaner, more maintainable codebase
+
+## Files Modified:
+- src/components/buttons/DeletePostButton.tsx
+- src/app/blog/[slug]/page.tsx
+- src/app/admin/blog/page.tsx
+- docs/project-map.md
+
+## Usage:
+// Prominent delete button
+<DeletePostButton postId={post.id} action={deletePostAction} useActionButtonStyle={true} />
+
+// Subtle delete button  
+<DeletePostButton postId={post.id} action={deletePostAction} useActionButtonStyle={false} />

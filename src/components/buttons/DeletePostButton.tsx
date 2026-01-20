@@ -1,14 +1,16 @@
 "use client";
 
 import { useRef } from "react";
-// import { useTransition } from "react";
+import ActionButton from "./ActionButton";
 
 export default function DeletePostButton({
   postId,
   action,
+  useActionButtonStyle = true,
 }: {
   postId: string;
   action: (FormData: FormData) => void;
+  useActionButtonStyle?: boolean;
 }) {
   const formRef = useRef<HTMLFormElement>(null);
 
@@ -24,9 +26,18 @@ export default function DeletePostButton({
       className="inline"
     >
       <input type="hidden" name="postId" value={postId} />
-      <button type="submit" className="text-red-500 hover:underline ml-2">
-        Slett
-      </button>
+      {useActionButtonStyle ? (
+        <ActionButton
+          as="button"
+          type="submit"
+          label="Slett"
+          variant="danger"
+        />
+      ) : (
+        <button type="submit" className="text-red-500 hover:underline ml-2">
+          Slett
+        </button>
+      )}
     </form>
   );
 }
