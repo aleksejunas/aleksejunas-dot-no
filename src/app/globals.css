@@ -195,6 +195,15 @@ body {
   transform: scale(0.97);
 }
 
+.action-button:disabled,
+.action-button[disabled] {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  pointer-events: none;
+}
+
 /* Secondary text and small details */
 .small,
 .muted,

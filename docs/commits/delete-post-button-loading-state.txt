@@ -1,0 +1,11 @@
+feat: add loading state to DeletePostButton for better UX
+
+- Added loading state tracking with useState and useTransition hooks
+- Button now shows "Sletter..." text and gets disabled during deletion
+- Prevents multiple clicks and provides clear visual feedback
+- Updated ActionButton to support disabled prop
+- Added CSS styles for disabled button state
+- Works with both ActionButton style and simple button style variants
+
+This improves the user experience by providing clear feedback during the
+asynchronous deletion process and prevents accidental multiple submissions.

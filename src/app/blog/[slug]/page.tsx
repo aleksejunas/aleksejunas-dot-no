@@ -28,17 +28,17 @@ async function getUser() {
 
 getPublishedPosts();
 
-async function getPost(slug: string) {
-  const supabase = await createClient();
-  const { data, error } = await supabase
-    .from("posts")
-    .select("id,title, content")
-    .eq("slug", slug)
-    .single();
-
-  if (error || !data) return null;
-  return data;
-}
+// async function getPost(slug: string) {
+//   const supabase = await createClient();
+//   const { data, error } = await supabase
+//     .from("posts")
+//     .select("id,title, content")
+//     .eq("slug", slug)
+//     .single();
+//
+//   if (error || !data) return null;
+//   return data;
+// }
 
 // TODO: Render MDX-innholdet trygt.
 // 1. Importer `MDXRemote` fra `next-mdx-remote/rsc`.
@@ -75,12 +75,17 @@ export default async function BlogPostPage({
         <ActionButton label="Back to Blog" href="/blog" variant="backToBlog" />
         {isLoggedIn && isAdmin && (
           <>
+            <h2>ADMIN</h2>
             <ActionButton
               label="Rediger"
               href={`/admin/blog/edit/${params.slug}`}
-              className="text-blue-500 hover:underline"
+              className="text-green-500 hover:underline"
             />
-            <DeletePostButton postId={post.id} action={deletePostAction} useActionButtonStyle={true} />
+            <DeletePostButton
+              postId={post.id}
+              action={deletePostAction}
+              useActionButtonStyle={true}
+            />
           </>
         )}
       </div>

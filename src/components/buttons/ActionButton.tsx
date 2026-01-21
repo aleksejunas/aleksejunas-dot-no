@@ -9,6 +9,7 @@ interface ActionButtonProps {
   type?: "button" | "submit" | "reset";
   onClick?: React.MouseEventHandler<HTMLElement | HTMLAnchorElement>;
   form?: string;
+  disabled?: boolean;
 }
 
 const ActionButton: React.FC<ActionButtonProps> = ({
@@ -32,7 +33,13 @@ const ActionButton: React.FC<ActionButtonProps> = ({
 
   if (as === "button") {
     return (
-      <button type={type} className={classes} onClick={onClick} form={form}>
+      <button 
+        type={type} 
+        className={classes} 
+        onClick={onClick} 
+        form={form}
+        disabled={disabled}
+      >
         {label}
       </button>
     );
