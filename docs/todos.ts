@@ -3,7 +3,7 @@
 // TODO: Might want to add analytics tracking for delete operations
 
 // TODO: Decide how to structure the project
-// TODO:: Might want to add analytics tracking for delete operations
+// TODO: Might want to add analytics tracking for delete operations
 // TODO: Create a hardcoded blogpost with objects
 // TODO: Set up the blog using MDX and Next.js file-based routing
 // TODO: Create a new branch for the blog
