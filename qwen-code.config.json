@@ -1,0 +1,33 @@
+{
+  "workspace": {
+    "readonly": true,
+    "ignore": [
+      ".git",
+      ".env",
+      ".env. */",
+
+      "node_modules",
+      ".next",
+      "out",
+      "build",
+      "coverage",
+      "test-results",
+      "playwright-report",
+      "blob-report",
+
+      "docs/commits",
+      "docs/commits/backup",
+      "*.bak",
+
+      "scripts",
+      "playwright.config.ts",
+
+      "pnpm-lock.yaml",
+      "pnpm-workspace.yaml.bak"
+    ]
+  },
+  "agent": {
+    "allowWrite": false,
+    "allowExec": false
+  }
+}
