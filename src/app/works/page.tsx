@@ -1,24 +1,32 @@
 const projects = [
   {
-    title: "Prosjekt 1",
+    title: "Solstice Tracker",
     subtitle: "Frontend / UI-eksperiment",
     description:
-      "Kort beskrivelse av prosjektet, hva du bygde og hvorfor. Fokus på interaksjon og leken typografi.",
+      "Et prosjekt spunnet ut fra min interesse for hvor lang dagen er og når det snur og går mot lysere tider..",
     year: "2024",
-    tech: ["Next.js", "TypeScript", "Tailwind CSS"],
+    tech: ["React", "TypeScript", "Tailwind CSS"],
     link: "https://example.com/prosjekt-1",
   },
   {
-    title: "Prosjekt 2",
-    subtitle: "Fullstack / Case study",
+    title: "Thats the sound of the alarm",
+    subtitle: "Mobilapp / Case study",
     description:
-      "En annen case som viser frem noe du er stolt av. Vekt på struktur, performance og DX.",
+      "En alarm og fokusapp bygget i React Native, med opprettelse av engangs- og gjentakende alarmer, søk i alarmliste, toggle for aktivering/deaktivering, lokal lagring i AsyncStorage og varslinger via Expo Notifications. Prosjektet bruker context-basert state, Expo Router for navigasjon og en egen Focus Timer-modul inspirert av Pomodoro.",
     year: "2023",
-    tech: ["React", "Node.js"],
+    tech: [
+      "Expo",
+      "React Native",
+      "TypeScript",
+      "Expo Router",
+      "AsyncStorage",
+      "Expo Notifications",
+      "Nativewind",
+    ],
     link: "https://example.com/prosjekt-2",
   },
   {
-    title: "Prosjekt 3",
+    title: "Ghost Host",
     subtitle: "Linux / Ollama / tailscale experiment",
     description:
       "Jeg kjører en lokal LLM på én maskin, tilgjengelig via Tailscale. En Go-backend styrer prompt, validerer JSON og genererer MDX-filer til bloggen.",
@@ -27,7 +35,7 @@ const projects = [
     link: "https://example.com/prosjekt-3",
   },
   {
-    title: "Prosjekt 4",
+    title: "Hungry Birds Fried Chicken Restaurant Website",
     subtitle: "Astro Dev Restaurant Website",
     description:
       "Website for en restaurant som jeg har bygd. Dette er en eksperiment med Astro, Tailwind CSS og Sanity.",
