@@ -11,7 +11,7 @@ const NewPostPage = () => {
       </section>
 
       <section className="flex flex-col gap-6 pl-6 py-6">
-        <ActionButton label="← Tilbake" href="/admin/blog" variant="backToBlog" />
+        <ActionButton label="← Tilbake" href="/admin/blog" variant="backToBlog" className="self-start" />
 
         <h2 className="text-xl font-thin font-sans tracking-wide uppercase">
           Nytt innlegg

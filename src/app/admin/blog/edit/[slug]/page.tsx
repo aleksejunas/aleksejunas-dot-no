@@ -30,6 +30,7 @@ export default async function EditPostPage({
           label="← Tilbake"
           href="/admin/blog"
           variant="backToBlog"
+          className="self-start"
         />
 
         <h2 className="text-xl font-thin font-sans tracking-wide uppercase">

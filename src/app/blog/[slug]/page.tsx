@@ -46,7 +46,7 @@ export default async function BlogPostPage({
 
       {/* Right column */}
       <section className="flex flex-col gap-6 pl-6 py-6">
-        <ActionButton label="← Tilbake" href="/blog" variant="backToBlog" />
+        <ActionButton label="← Tilbake" href="/blog" variant="backToBlog" className="self-start" />
 
         <article className="prose prose-headings:font-sans prose-headings:font-bold lg:prose-xl max-w-none">
           <MDXRemote source={post.content} components={mdxComponents} />
