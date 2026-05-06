@@ -48,8 +48,7 @@ export default async function BlogPostPage({
       <section className="flex flex-col gap-6 pl-6 py-6">
         <ActionButton label="← Tilbake" href="/blog" variant="backToBlog" />
 
-        <article className="prose prose-headings:font-sans prose-headings:font-bold prose-headings:text-foreground prose-p:text-foreground prose-a:text-accent prose-strong:text-foreground lg:prose-xl max-w-none">
-          <h1>{post.title}</h1>
+        <article className="prose prose-headings:font-sans prose-headings:font-bold lg:prose-xl max-w-none">
           <MDXRemote source={post.content} components={mdxComponents} />
         </article>
 

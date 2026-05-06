@@ -204,6 +204,18 @@ body {
   pointer-events: none;
 }
 
+/* Prose — tving alle tekstelementer til å bruke site CSS-variabler */
+.prose {
+  --tw-prose-body: var(--foreground);
+  --tw-prose-headings: var(--foreground);
+  --tw-prose-bold: var(--foreground);
+  --tw-prose-counters: var(--foreground);
+  --tw-prose-bullets: var(--foreground);
+  --tw-prose-quotes: var(--foreground);
+  --tw-prose-links: var(--accent);
+  --tw-prose-hr: color-mix(in oklab, var(--foreground) 20%, transparent);
+}
+
 /* Prose code blocks — bruk site-farger, ikke Tailwind Typography sine defaults */
 .prose pre {
   background: color-mix(in oklab, var(--foreground) 8%, var(--background));
