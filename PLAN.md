@@ -26,6 +26,7 @@
 
 ## Lav prioritet / Nice to have
 
+- [ ] **Kopier-knapp i kodeblokker** — `"use client"`-komponent som wrapper `<pre>`, viser "Kopier"-knapp øverst til høyre, bruker `navigator.clipboard.writeText`. Registreres i `mdx-components.tsx` som custom `pre`-komponent
 - [ ] Auth-flyt — Google Sign-in via Supabase (TODO i login-siden)
 - [ ] Hover-animasjon på ikonene på forsiden (delvis gjort, men en TODO finnes)
 - [ ] Vurder om `/mdx`-ruten skal fjernes permanent eller beholdes som sandbox
@@ -41,3 +42,8 @@
 - [x] `/auth/signout` route opprettet
 - [x] Logg ut-knapp lagt til i admin med styling
 - [x] `HomeLink`-overlapp fikset med `pr-20`
+- [x] `about/page.tsx` og `contact/page.tsx` — ekte innhold og korrekt layout
+- [x] Kodeblokker i prose — farger overstyrt til site CSS-variabler (fungerer i alle temaer)
+- [x] Separator mellom blogginnlegg (`divide-y`)
+- [x] Bloggliste — tittelstørrelse nedskalert, `ActionButton` fikset til `self-start`
+- [x] `scripts/seed-posts.mjs` — 5 seed-innlegg opprettet og kjørt

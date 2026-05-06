@@ -17,21 +17,21 @@ export default async function BlogIndexPage() {
         </h1>
       </section>
       {/* Right Column - Contains the main blog list content */}
-      <section className="flex flex-col justify-center gap-6 pl-6">
-        <ActionButton label="Nytt innlegg" href="/admin/blog/new" />
+      <section className="flex flex-col justify-center gap-6 pl-6 pr-20">
+        <ActionButton label="Nytt innlegg" href="/admin/blog/new" className="self-start" />
         <h2 className="text-xl font-thin font-sans tracking-wide uppercase">
           Alle innlegg
         </h2>
-        <ul className="space-y-4">
+        <ul className="divide-y divide-foreground/15">
           {posts.length === 0 ? (
             <li className="text-muted text-lg">
               Ingen publiserte innlegg funnet
             </li>
           ) : (
             posts.map((post) => (
-              <li key={post.slug}>
+              <li key={post.slug} className="py-4 first:pt-0">
                 <Link href={`/blog/${post.slug}`}>
-                  <span className="font-sans font-bold text-4xl sm:text-5xl lg:text-7xl leading-none capitalize transition hover:text-accent hover:text-rose-400 hover:opacity-90 focus:outline-none">
+                  <span className="font-sans font-bold text-2xl sm:text-3xl lg:text-4xl leading-tight capitalize transition hover:text-accent hover:text-rose-400 hover:opacity-90 focus:outline-none">
                     {post.title}
                   </span>
                 </Link>

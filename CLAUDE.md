@@ -75,8 +75,14 @@ pnpm lint     # ESLint
 ## Endringslogg
 
 ### 2026-05-06
-- Fikset `blog/[slug]/page.tsx`: brukte `getPublishedPosts()` (uten `content`-felt) i stedet for `getPostBySlug(slug)` — innhold ble aldri lastet
-- Fikset `post.id.content` → `post.content` (feil feltaksess)
-- Fjernet streiende `getPublishedPosts()`-kall på toppnivå i slug-siden
-- Ryddet opp løste TODO-kommentarer i slug-siden
 - Gjenopprettet Supabase-prosjekt etter pause (free-tier inaktivitet)
+- Fikset `blog/[slug]/page.tsx`: brukte `getPublishedPosts()` (uten `content`-felt) i stedet for `getPostBySlug(slug)`
+- Fikset `post.id.content` → `post.content`
+- Admin-sider restylet til å matche sitedesign (`grid-cols-[1fr_4fr]`, CSS-variabler)
+- Edit-form fikset: la til `updatePost.bind(null, post.id)` som action
+- `AuthStatusDot` gjort klikkbar (grønn → `/admin/blog`, rød → `/login`)
+- `/auth/signout` POST route opprettet
+- `about/page.tsx` og `contact/page.tsx` bygget med ekte innhold og korrekt layout
+- Kodeblokker i `prose` overstyrt til site CSS-variabler i `globals.css`
+- Separator mellom blogginnlegg med `divide-y divide-foreground/15`
+- `scripts/seed-posts.mjs` — seeder 5 blogginnlegg (krever `SUPABASE_SERVICE_ROLE_KEY`)

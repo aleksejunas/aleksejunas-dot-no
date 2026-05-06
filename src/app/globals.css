@@ -204,6 +204,26 @@ body {
   pointer-events: none;
 }
 
+/* Prose code blocks — bruk site-farger, ikke Tailwind Typography sine defaults */
+.prose pre {
+  background: color-mix(in oklab, var(--foreground) 8%, var(--background));
+  color: var(--foreground);
+  border: 1px solid color-mix(in oklab, var(--foreground) 12%, transparent);
+}
+
+.prose :not(pre) > code {
+  color: var(--accent);
+  background: color-mix(in oklab, var(--foreground) 8%, var(--background));
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+.prose code::before,
+.prose code::after {
+  content: none;
+}
+
 /* Secondary text and small details */
 .small,
 .muted,

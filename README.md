@@ -1,43 +1,73 @@
-# aleksejunas-dot-no
+# aleksejunas.no
 
-Personal portfolio built with the Next.js App Router, Tailwind v4, and strict TypeScript. The project follows the conventions documented in `AGENTS.md`.
+Personlig nettside og blogg for Rolf Aleksejunas Christensen.
 
-## Development
+## Stack
+
+- **Next.js 15** — App Router, Turbopack, Server Components
+- **Supabase** — PostgreSQL database + Auth
+- **MDX** — blogginnhold lagret som tekst, rendret med `next-mdx-remote`
+- **Tailwind CSS** — inkl. `@tailwindcss/typography` for prose-stiling
+- **Framer Motion** — animasjoner
+
+## Kom i gang
 
 ```bash
 pnpm install
 pnpm dev
 ```
 
-The dev server boots with Turbopack at [http://localhost:3000](http://localhost:3000). Edit files under `src/app/**` and the browser will hot-reload automatically.
+Krever en `.env.local` med:
 
-## Local CI/CD Pipeline
-
-Use `scripts/ci-local.sh` to replicate the GitHub Actions workflow before pushing:
-
-```bash
-./scripts/ci-local.sh
+```
+NEXT_PUBLIC_SUPABASE_URL=
+NEXT_PUBLIC_SUPABASE_ANON_KEY=
 ```
 
-By default the script runs `pnpm install --frozen-lockfile`, `pnpm lint`, `pnpm exec playwright test`, and `pnpm build`. Add `--skip-*` flags or `--only=<step>` to tailor the run, e.g. `./scripts/ci-local.sh --skip-tests` while iterating on lint fixes. Use `./scripts/ci-local.sh --help` to see all options.
+## Sider
 
-If Playwright browsers are missing locally, install them once via `pnpm exec playwright install --with-deps`.
+| Rute | Beskrivelse |
+|------|-------------|
+| `/` | Forside med navigasjon |
+| `/blog` | Bloggliste |
+| `/blog/[slug]` | Enkelt blogginnlegg (MDX) |
+| `/works` | Prosjektoversikt |
+| `/about` | Om meg |
+| `/contact` | Kontaktinfo |
+| `/admin/blog` | Admin — liste over innlegg |
+| `/admin/blog/new` | Admin — nytt innlegg |
+| `/admin/blog/edit/[slug]` | Admin — rediger innlegg |
+| `/login` | Innlogging via Supabase Auth |
+| `/auth/callback` | Supabase OAuth callback |
+| `/auth/signout` | Logg ut (POST) |
 
-## Testing
+## Temaer
 
-End-to-end tests live under `tests/*.spec.ts` and run through Playwright:
+Siden støtter fire temaer via `data-style` på `<html>`:
+
+- Standard (lys, gul bakgrunn)
+- Mørk (følger systempreferanse)
+- **Punk** — safety yellow + safety pink
+- **Midnight** — mørk med cyan aksent
+
+Bytt tema med ⚡-knappen nederst til venstre.
+
+## Scripts
 
 ```bash
-pnpm exec playwright test
+# Seed 5 blogginnlegg (krever SUPABASE_SERVICE_ROLE_KEY i .env.local)
+node scripts/seed-posts.mjs
 ```
 
-Keep specs independent, mock Supabase calls, and lean on `expect.poll` for UI assertions that depend on viewport changes.
-
-## Production build
+## Lokal CI
 
 ```bash
-pnpm build
-pnpm start
+./scripts/ci-local.sh           # kjør alle steg
+./scripts/ci-local.sh --help    # se flagg
 ```
 
-Use this combo to verify deployment readiness. Attach build artifacts in CI as described in `AGENTS.md` and consume them from deployment scripts (e.g. `scripts/deploy.sh`) when promoting to prod.
+## Dokumentasjon
+
+- [`PLAN.md`](./PLAN.md) — prioritert oppgaveliste
+- [`CLAUDE.md`](./CLAUDE.md) — prosjektnotater og endringslogg
+- [`docs/database_schema.md`](./docs/database_schema.md) — Supabase-skjema og RLS-policies

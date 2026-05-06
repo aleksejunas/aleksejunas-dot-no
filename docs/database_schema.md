@@ -1,7 +1,5 @@
 # Database Schema for Blog Posts
 
-<!-- TODO: Kjør SQL-koden under i Supabase SQL Editor for å opprette `posts`-tabellen og sette opp Row Level Security. -->
-
 ## Table: `posts`
 
 ```sql
