@@ -53,7 +53,7 @@ export default async function AdminBlogPage() {
         <form action="/auth/signout" method="POST">
           <button
             type="submit"
-            className="text-xs font-mono uppercase tracking-wider px-3 py-1.5 rounded border border-rose-500/40 text-rose-400 hover:bg-rose-500 hover:text-white hover:border-rose-500 transition-all duration-150"
+            className="text-xs font-mono text-muted hover:text-foreground transition-colors uppercase"
           >
             Logg ut
           </button>

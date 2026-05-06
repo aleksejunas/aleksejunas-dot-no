@@ -1,6 +1,9 @@
 // filepath: src/components/mdx-components.tsx
 
+import CodeBlock from "./mdx/CodeBlock";
+
 const mdxComponents = {
+  pre: CodeBlock,
   a: (props: React.ComponentPropsWithoutRef<"a">) => (
     <a {...props} className="text-blue-600 underline" />
   ),
