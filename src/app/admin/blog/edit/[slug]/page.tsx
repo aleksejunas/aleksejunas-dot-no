@@ -26,15 +26,26 @@ export default async function EditPostPage({
       </section>
 
       <section className="flex flex-col gap-6 pl-6 py-6">
-        <ActionButton label="← Tilbake" href="/admin/blog" variant="backToBlog" />
+        <ActionButton
+          label="← Tilbake"
+          href="/admin/blog"
+          variant="backToBlog"
+        />
 
         <h2 className="text-xl font-thin font-sans tracking-wide uppercase">
           Rediger innlegg
         </h2>
 
-        <form id="edit-form" action={updatePostWithId} className="flex flex-col gap-6 max-w-2xl">
+        <form
+          id="edit-form"
+          action={updatePostWithId}
+          className="flex flex-col gap-6 max-w-2xl"
+        >
           <div className="flex flex-col gap-1">
-            <label htmlFor="title" className="text-xs font-mono text-muted uppercase tracking-wider">
+            <label
+              htmlFor="title"
+              className="text-xs font-mono text-muted uppercase tracking-wider"
+            >
               Tittel
             </label>
             <input
@@ -48,7 +59,10 @@ export default async function EditPostPage({
           </div>
 
           <div className="flex flex-col gap-1">
-            <label htmlFor="slug" className="text-xs font-mono text-muted uppercase tracking-wider">
+            <label
+              htmlFor="slug"
+              className="text-xs font-mono text-muted uppercase tracking-wider"
+            >
               Slug
             </label>
             <input
@@ -62,7 +76,10 @@ export default async function EditPostPage({
           </div>
 
           <div className="flex flex-col gap-1">
-            <label htmlFor="content" className="text-xs font-mono text-muted uppercase tracking-wider">
+            <label
+              htmlFor="content"
+              className="text-xs font-mono text-muted uppercase tracking-wider"
+            >
               Innhold (MDX)
             </label>
             <textarea
@@ -71,7 +88,7 @@ export default async function EditPostPage({
               rows={20}
               required
               defaultValue={post.content}
-              className="bg-transparent border border-foreground/30 rounded px-3 py-2 text-foreground font-mono text-sm focus:outline-none focus:border-accent resize-y"
+              className="bg-ma border border-foreground/30 rounded px-3 py-2 text-foreground font-mono text-sm focus:outline-none focus:border-accent resize-y"
             />
           </div>
 
@@ -81,7 +98,9 @@ export default async function EditPostPage({
         </form>
 
         <div className="flex gap-4 items-center border-t border-foreground/20 pt-4 mt-4 max-w-2xl">
-          <span className="text-xs font-mono text-muted uppercase tracking-wider">Farlig sone</span>
+          <span className="text-xs font-mono text-muted uppercase tracking-wider">
+            Farlig sone
+          </span>
           <DeletePostButton
             postId={post.id}
             action={deletePostAction}

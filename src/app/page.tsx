@@ -9,7 +9,7 @@ const links = {
   WORKS: "/works",
   ABOUT: "/about",
   CONTACT: "/contact",
-  MDX: "/mdx",
+  // MDX: "/mdx",
 };
 
 const HomePage = () => {
