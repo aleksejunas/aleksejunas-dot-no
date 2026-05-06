@@ -14,7 +14,7 @@ export default async function AdminBlogPage() {
         </h1>
       </section>
 
-      <section className="flex flex-col gap-6 pl-6 py-6">
+      <section className="flex flex-col gap-6 pl-6 py-6 pr-20">
         <div className="flex items-center justify-between">
           <h2 className="text-xl font-thin font-sans tracking-wide uppercase">
             Blogginnlegg
