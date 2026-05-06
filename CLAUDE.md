@@ -1,5 +1,23 @@
 # aleksejunas.no — prosjektnotater
 
+## Commit-meldinger
+
+Når brukeren ber om en commit-melding, gi alltid en **lazygit-klar** melding i dette formatet — klar til å lime inn:
+
+```
+<type>: <kort sammendrag>
+
+- <detalj>
+- <detalj>
+- <detalj>
+```
+
+Typer: `fix`, `feat`, `refactor`, `docs`, `chore`, `style`, `test`
+- Summary-linja: maks ~72 tegn, imperativ form
+- Detaljer: bullet-punkter, én linje per logisk endring
+- Ikke legg til `Co-Authored-By` eller annet fluff med mindre bedt om det
+
+
 ## Stack
 
 - **Framework**: Next.js 15 (App Router, Turbopack)

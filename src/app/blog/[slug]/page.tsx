@@ -36,16 +36,26 @@ export default async function BlogPostPage({
   const isAdmin = user?.user_metadata?.role === "admin";
 
   return (
-    <main>
-      <article className="prose lg:prose-xl">
-        <h1>{post.title}</h1>
-        <MDXRemote source={post.content} components={mdxComponents} />
-      </article>
-      <div className="mt-8 flex gap-4">
-        <ActionButton label="Back to Blog" href="/blog" variant="backToBlog" />
+    <main className="grid min-h-screen grid-cols-[1fr_4fr] p-6">
+      {/* Left column — matches blog index layout */}
+      <section className="text-sm border-r border-foreground/50 pr-6">
+        <h1 className="font-sans font-bold text-xl uppercase rotate-180 [writing-mode:vertical-rl]">
+          Blog
+        </h1>
+      </section>
+
+      {/* Right column */}
+      <section className="flex flex-col gap-6 pl-6 py-6">
+        <ActionButton label="← Tilbake" href="/blog" variant="backToBlog" />
+
+        <article className="prose prose-headings:font-sans prose-headings:font-bold prose-headings:text-foreground prose-p:text-foreground prose-a:text-accent prose-strong:text-foreground lg:prose-xl max-w-none">
+          <h1>{post.title}</h1>
+          <MDXRemote source={post.content} components={mdxComponents} />
+        </article>
+
         {isLoggedIn && isAdmin && (
-          <>
-            <h2>ADMIN</h2>
+          <div className="flex gap-4 items-center border-t border-foreground/20 pt-4 mt-4">
+            <span className="text-sm font-mono text-muted uppercase">Admin</span>
             <ActionButton
               label="Rediger"
               href={`/admin/blog/edit/${params.slug}`}
@@ -56,9 +66,9 @@ export default async function BlogPostPage({
               action={deletePostAction}
               useActionButtonStyle={true}
             />
-          </>
+          </div>
         )}
-      </div>
+      </section>
     </main>
   );
 }
