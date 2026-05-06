@@ -1,61 +1,56 @@
 import Link from "next/link";
-import {
-  deletePostAction,
-  getPublishedPosts,
-} from "../../../lib/actions";
+import { deletePostAction, getPublishedPosts } from "../../../lib/actions";
 import DeletePostButton from "@/components/buttons/DeletePostButton";
-
-// TODO: Implementer henting av blogginnlegg fra Supabase.
-// 1. Importer og bruk `createClient` fra `lib/supabase/server`.
-// 2. Hent alle innlegg fra `posts`-tabellen, sortert etter `created_at`.
-// 3. Håndter eventuelle feil under henting.
-// 4. Map gjennom `posts`-arrayet og render en liste med innlegg.
-// 5. For hvert innlegg, vis tittel og lenker til `edit` og en knapp for `delete`.
-
-// async function getPosts() {
-//   // Foreløpig mock data
-//   return [
-//     { id: "1", title: "Mitt første innlegg", slug: "mitt-forste-innlegg" },
-//     { id: "2", title: "Et annet innlegg", slug: "et-annet-innlegg" },
-//   ];
-// }
+import ActionButton from "@/components/buttons/ActionButton";
 
 export default async function AdminBlogPage() {
   const posts = await getPublishedPosts();
 
-
-
   return (
-    <div className="space-y-8">
-      <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold">Admin: Blogginnlegg</h1>
-        <Link
-          href="/admin/blog/new"
-          className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
-        >
-          Nytt innlegg
-        </Link>
-      </div>
+    <main className="grid min-h-screen grid-cols-[1fr_4fr] p-6">
+      <section className="text-sm border-r border-foreground/50 pr-6">
+        <h1 className="font-sans font-bold text-xl uppercase rotate-180 [writing-mode:vertical-rl]">
+          Admin
+        </h1>
+      </section>
 
-      <ul className="space-y-4">
-        {posts.map((post) => (
-          <li
-            key={post.id}
-            className="flex items-center justify-between p-4 border rounded-md"
-          >
-            <span className="font-semibold">{post.title}</span>
-            <div className="space-x-2">
+      <section className="flex flex-col gap-6 pl-6 py-6">
+        <div className="flex items-center justify-between">
+          <h2 className="text-xl font-thin font-sans tracking-wide uppercase">
+            Blogginnlegg
+          </h2>
+          <ActionButton label="Nytt innlegg" href="/admin/blog/new" />
+        </div>
+
+        <ul className="flex flex-col gap-2">
+          {posts.map((post) => (
+            <li
+              key={post.id}
+              className="flex items-center justify-between py-4 border-b border-foreground/20"
+            >
               <Link
-                href={`/admin/blog/edit/${post.slug}`}
-                className="text-blue-500 hover:underline"
+                href={`/blog/${post.slug}`}
+                className="font-sans font-semibold text-lg hover:text-accent transition-colors"
               >
-                Rediger
+                {post.title}
               </Link>
-              <DeletePostButton postId={post.id} action={deletePostAction} useActionButtonStyle={false} />
-            </div>
-          </li>
-        ))}
-      </ul>
-    </div>
+              <div className="flex gap-4">
+                <Link
+                  href={`/admin/blog/edit/${post.slug}`}
+                  className="text-sm font-mono text-muted hover:text-foreground transition-colors"
+                >
+                  Rediger
+                </Link>
+                <DeletePostButton
+                  postId={post.id}
+                  action={deletePostAction}
+                  useActionButtonStyle={false}
+                />
+              </div>
+            </li>
+          ))}
+        </ul>
+      </section>
+    </main>
   );
 }

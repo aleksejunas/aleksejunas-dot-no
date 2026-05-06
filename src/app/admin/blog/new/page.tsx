@@ -1,74 +1,70 @@
 import { createPost } from "@/lib/actions";
-
-// TODO: Koble dette skjemaet til `createPost` server action.
-// 1. Sørg for at `action`-attributtet på `<form>`-elementet er satt til `createPost`.
-// 2. Gi input-feltene (`title`, `slug`, `content`) riktige `name`-attributter slik at de blir tilgjengelige i `formData` i server action.
+import ActionButton from "@/components/buttons/ActionButton";
 
 const NewPostPage = () => {
   return (
-    <main className="max-w-xl mx-auto py-8">
-      <form action={createPost} className="space-y-6">
-        <h1 className="text-2xl font-bold">Skriv et nytt innlegg</h1>
+    <main className="grid min-h-screen grid-cols-[1fr_4fr] p-6">
+      <section className="text-sm border-r border-foreground/50 pr-6">
+        <h1 className="font-sans font-bold text-xl uppercase rotate-180 [writing-mode:vertical-rl]">
+          Admin
+        </h1>
+      </section>
 
-        <div>
-          <label
-            htmlFor="title"
-            className="block text-sm font-medium text-gray-700"
-          >
-            Tittel
-          </label>
-          <input
-            type="text"
-            name="title"
-            id="title"
-            required
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-          />
-        </div>
+      <section className="flex flex-col gap-6 pl-6 py-6">
+        <ActionButton label="← Tilbake" href="/admin/blog" variant="backToBlog" />
 
-        <div>
-          <label
-            htmlFor="slug"
-            className="block text-sm font-medium text-gray-700"
-          >
-            Slug
-          </label>
-          <input
-            type="text"
-            name="slug"
-            id="slug"
-            required
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-            placeholder="f.eks-mitt-fantastiske-innlegg"
-          />
-        </div>
+        <h2 className="text-xl font-thin font-sans tracking-wide uppercase">
+          Nytt innlegg
+        </h2>
 
-        <div>
-          <label
-            htmlFor="content"
-            className="block text-sm font-medium text-gray-700"
-          >
-            Innhold (MDX)
-          </label>
-          <textarea
-            name="content"
-            id="content"
-            rows={15}
-            required
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-          />
-        </div>
+        <form action={createPost} className="flex flex-col gap-6 max-w-2xl">
+          <div className="flex flex-col gap-1">
+            <label htmlFor="title" className="text-xs font-mono text-muted uppercase tracking-wider">
+              Tittel
+            </label>
+            <input
+              type="text"
+              name="title"
+              id="title"
+              required
+              className="bg-transparent border border-foreground/30 rounded px-3 py-2 text-foreground focus:outline-none focus:border-accent"
+            />
+          </div>
 
-        <button
-          type="submit"
-          className="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-        >
-          Opprett innlegg
-        </button>
-      </form>
+          <div className="flex flex-col gap-1">
+            <label htmlFor="slug" className="text-xs font-mono text-muted uppercase tracking-wider">
+              Slug
+            </label>
+            <input
+              type="text"
+              name="slug"
+              id="slug"
+              required
+              placeholder="f.eks-mitt-fantastiske-innlegg"
+              className="bg-transparent border border-foreground/30 rounded px-3 py-2 text-foreground placeholder:text-muted focus:outline-none focus:border-accent"
+            />
+          </div>
+
+          <div className="flex flex-col gap-1">
+            <label htmlFor="content" className="text-xs font-mono text-muted uppercase tracking-wider">
+              Innhold (MDX)
+            </label>
+            <textarea
+              name="content"
+              id="content"
+              rows={20}
+              required
+              className="bg-transparent border border-foreground/30 rounded px-3 py-2 text-foreground font-mono text-sm focus:outline-none focus:border-accent resize-y"
+            />
+          </div>
+
+          <div>
+            <ActionButton label="Opprett innlegg" as="button" type="submit" />
+          </div>
+        </form>
+      </section>
     </main>
   );
 };
 
 export default NewPostPage;
-
